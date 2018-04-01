@@ -1,5 +1,6 @@
 package br.ufs.hillclimbing;
 
+//Utiliza random para se aproximar do objetivo
 public class SphereFunction {
 	
 	public static void main(String[] args) {
