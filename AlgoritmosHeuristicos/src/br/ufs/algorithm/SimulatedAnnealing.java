@@ -2,10 +2,15 @@ package br.ufs.algorithm;
 
 public abstract class SimulatedAnnealing {
 
-	public void execute(int t) {
+	/**
+	 * Executa o Simulated Annealing
+	 * @param t				Temperatura
+	 * @param lengthArray 	Tamanho do Array de Solução
+	 * */
+	public void execute(int t, int lengthArray) {
 
 		// some initial candidate solution
-		double[] s = initSolution(5);
+		double[] s = initSolution(lengthArray);
 		double[] best = s;
 
 		while (t <= 0 || quality(best) == 0) {

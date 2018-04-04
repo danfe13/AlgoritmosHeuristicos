@@ -2,9 +2,14 @@ package br.ufs.algorithm;
 
 public abstract class HillClimbing {
 	
-	public void execute(int i) {
+	/**
+	 * Executa o HillClimbing
+	 * @param i				Número de iterações do Algoritmo
+	 * @param lengthArray 	Tamanho do Array de Solução
+	 * */
+	public void execute(int i, int lengthArray) {
 
-		double[] s = initSolution(5);
+		double[] s = initSolution(lengthArray);
 
 		int cont = 0;
 		while (cont < i) {
