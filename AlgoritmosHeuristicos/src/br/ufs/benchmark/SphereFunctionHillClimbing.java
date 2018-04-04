@@ -1,4 +1,4 @@
-package br.ufs.benchmarkFunctions;
+package br.ufs.benchmark;
 
 import br.ufs.algorithm.HillClimbing;
 
