@@ -5,18 +5,25 @@ import br.ufs.algorithm.HillClimbing;
 public class SphereFunctionHillClimbing extends HillClimbing{
 
 	public double[] initSolution(int length) {
-		// TODO Auto-generated method stub
-		return null;
+		double[] s = new double[length];
+		for (int i = 0; i < s.length; i++) {
+			s[i] = Math.random() * 100;
+		}
+		return s;
 	}
 
 	public double[] tweak(double[] s) {
-		// TODO Auto-generated method stub
-		return null;
+		int i = (int) (Math.random() * ((s.length - 1) + 1));
+		s[i] = Math.random() * 100;
+		return s;
 	}
 
 	public double quality(double[] s) {
-		// TODO Auto-generated method stub
-		return 0;
+		double sum = 0.0;
+		for (int i = 0; i < s.length; i++) {
+			sum += s[i] * s[i];
+		}
+		return (sum);
 	}
 
 }
