@@ -24,10 +24,50 @@ public abstract class HillClimbing {
 
 	}
 	
-	public abstract double[] initSolution(int length);
+	public double[] initSolution(int length) {
+		double[] s = new double[length];
+		for (int i = 0; i < s.length; i++) {
+			s[i] = Math.random() * 100;
+		}
+		print(s);
+		return s;
+	}
 	
-	public abstract double[] tweak(double[] s);
+	//Algorithm 8 Bounded Uniform Convolution
+	public double[] tweak(double[] s) {
+		//Probabilidade de adicionar ruído a um elemento no vetor
+		int p = 1;
+		//Range de cada elemento do vetor
+		int r = 100;
+		int min = -100;
+		int max = 100;
+		double n;
+		
+		for (int i = 0; i < s.length; i++) {
+			if (p >= Math.random()) {
+				do {
+					n = Math.random() * r;
+					System.out.println(s[i] + n);
+				} while ((min >= s[i] + n) && (max <= s[i] + n));
+				s[i] = s[i] + n;
+			}
+				
+		}
+		print(s);
+		return s;
+	}
 	
 	public abstract double quality(double[] s);
+	
+	public void print(double[] s) {
+		String result = "[";
+		for (int i = 0; i < s.length; i++) {
+			if(i == s.length - 1)
+				result = result + s[i] + "]";
+			else
+				result = result + s[i] + ", ";
+		}
+		System.out.println(result + " - " + quality(s));
+	}
 	
 }

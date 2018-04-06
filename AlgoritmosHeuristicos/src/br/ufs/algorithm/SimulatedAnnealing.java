@@ -26,9 +26,34 @@ public abstract class SimulatedAnnealing {
 
 	}
 
-	public abstract double[] initSolution(int length);
-
-	public abstract double[] tweak(double[] s);
+	public double[] initSolution(int length) {
+		double[] s = new double[length];
+		for (int i = 0; i < s.length; i++) {
+			s[i] = Math.random() * 100;
+		}
+		return s;
+	}
+	
+	//Algorithm 8 Bounded Uniform Convolution
+	public double[] tweak(double[] s) {
+		//Probabilidade de adicionar ruído a um elemento no vetor
+		int p = 1;
+		//Range de cada elemento do vetor
+		int r = 100;
+		int min = -100;
+		int max = 100;
+		double n;
+		for (int i = 0; i < s.length; i++) {
+			if (p >= Math.random()) {
+				do {
+					n = Math.random() * r;
+				} while ((min <= s[i] + n) && (max >= s[i] + n));
+				s[i] = s[i] + n;
+			}
+				
+		}
+		return s;
+	}
 
 	public abstract double quality(double[] s);
 
