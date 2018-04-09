@@ -5,7 +5,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		SphereFunctionHillClimbing sphereFunction = new SphereFunctionHillClimbing();
-		sphereFunction.execute(100, 5);
+		sphereFunction.execute(1000, 5);
 
 	}
 
