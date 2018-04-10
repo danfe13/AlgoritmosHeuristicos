@@ -18,15 +18,37 @@ import br.ufs.benchmark.SphereFunctionHillClimbing;
 import br.ufs.benchmark.SphereFunctionSimulatedAnnealing;
 
 public class Main {
-
+	
 	public static void main(String[] args) throws Exception {
 		
-		//SphereFunctionHillClimbing sphereFunction = new SphereFunctionHillClimbing(5, 1, 100, -100, 100, 1000);
-		//SphereFunctionSimulatedAnnealing sphereFunction = new SphereFunctionSimulatedAnnealing(5, 0.2, 100, -100, 100, 10000);
-		//SchwefelsProblemHillClimbing schwefelsProblem = new SchwefelsProblemHillClimbing(5, 1, 100, -100, 100, 1000);
-		SchwefelsProblemSimulatedAnnealing schwefelsProblem = new SchwefelsProblemSimulatedAnnealing(5, 0.5, 100, -100, 100, 10000);
-		double[] evolutionQuality = schwefelsProblem.execute();
-		plotarGrafico(evolutionQuality, "Simulated Annealing");
+		do {
+			
+			int benchmark  = Integer.parseInt(JOptionPane.showInputDialog("Benchmark: \n1 - Sphere Function\n2 - SchwefelsProblem"));
+			int algorithm = Integer.parseInt(JOptionPane.showInputDialog("Algotithm: \n1 - Hill Climbing\n2 - Simulated Annealing"));
+			
+			if(benchmark == 1) {
+				if(algorithm == 1) {
+					SphereFunctionHillClimbing sphereFunctionHC = new SphereFunctionHillClimbing(5, 1, 100, -100, 100, 10000);
+					double[] evolutionQuality = sphereFunctionHC.execute();
+					plotarGrafico(evolutionQuality, "Sphere Function witch Hill Climbing");
+				}else if(algorithm == 2) {
+					SphereFunctionSimulatedAnnealing sphereFunctionSA = new SphereFunctionSimulatedAnnealing(5, 1, 100, -100, 100, 10000);
+					double[] evolutionQuality = sphereFunctionSA.execute();
+					plotarGrafico(evolutionQuality, "Sphere Function witch Simulated Annealing");
+				}
+			}else if(benchmark == 2) {
+				if(algorithm == 1) {
+					SchwefelsProblemHillClimbing schwefelsProblemHC = new SchwefelsProblemHillClimbing(5, 1, 100, -100, 100, 10000);
+					double[] evolutionQuality = schwefelsProblemHC.execute();
+					plotarGrafico(evolutionQuality, "Schwefels Problem witch Hill Climbing");
+				}else if(algorithm == 2) {
+					SchwefelsProblemSimulatedAnnealing schwefelsProblemSA = new SchwefelsProblemSimulatedAnnealing(5, 1, 100, -100, 100, 10000);
+					double[] evolutionQuality = schwefelsProblemSA.execute();
+					plotarGrafico(evolutionQuality, "SchwefelsProblem witch Simulated Annealing");
+				}
+			}
+		} while (JOptionPane.showConfirmDialog(null, "Deseja Continuar?") == 0);
+		
 	}
 	
 	public static void plotarGrafico(double[] evolutionQuality, String algoritmo) throws FileNotFoundException, IOException {
@@ -38,7 +60,7 @@ public class Main {
 		
 		JFreeChart grafico = ChartFactory.createLineChart(algoritmo, "Iteração", "Valor", ds,
 				PlotOrientation.VERTICAL, true, true, false);
-		ChartUtilities.writeChartAsPNG(new FileOutputStream("grafico.png"), grafico, 1200, 800);
+		ChartUtilities.writeChartAsPNG(new FileOutputStream("grafico.png"), grafico, 1000, 500);
 
 		ImageIcon imagem = new ImageIcon("grafico.png");
 		JOptionPane.showMessageDialog(null, "", "", JOptionPane.INFORMATION_MESSAGE, imagem);	
