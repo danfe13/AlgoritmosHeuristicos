@@ -12,6 +12,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import br.ufs.benchmark.SchwefelsProblemHillClimbing;
+import br.ufs.benchmark.SchwefelsProblemSimulatedAnnealing;
 import br.ufs.benchmark.SphereFunctionHillClimbing;
 import br.ufs.benchmark.SphereFunctionSimulatedAnnealing;
 
@@ -20,8 +22,10 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		
 		//SphereFunctionHillClimbing sphereFunction = new SphereFunctionHillClimbing(5, 1, 100, -100, 100, 1000);
-		SphereFunctionSimulatedAnnealing sphereFunction = new SphereFunctionSimulatedAnnealing(5, 0.2, 100, -100, 100, 10000);
-		double[] evolutionQuality = sphereFunction.execute();
+		//SphereFunctionSimulatedAnnealing sphereFunction = new SphereFunctionSimulatedAnnealing(5, 0.2, 100, -100, 100, 10000);
+		//SchwefelsProblemHillClimbing schwefelsProblem = new SchwefelsProblemHillClimbing(5, 1, 100, -100, 100, 1000);
+		SchwefelsProblemSimulatedAnnealing schwefelsProblem = new SchwefelsProblemSimulatedAnnealing(5, 0.5, 100, -100, 100, 10000);
+		double[] evolutionQuality = schwefelsProblem.execute();
 		plotarGrafico(evolutionQuality, "Simulated Annealing");
 	}
 	
