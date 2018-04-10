@@ -1,19 +1,28 @@
 package br.ufs.algorithm;
 
 public abstract class HillClimbing extends BaseAlgorithm {
+
+	//Número de Iterações do Algoritmo
+	protected int iterations;
+	
+	public HillClimbing(int lengthArray, double p, int range, int min, int max, int iterations) {
+		super(lengthArray, p, range, min, max);
+		this.iterations = iterations;
+	}
 	
 	/**
 	 * Executa o HillClimbing
-	 * @param i				Número de iterações do Algoritmo
-	 * @param lengthArray 	Tamanho do Array de Solução
-	 * */
-	public void execute(int i, int lengthArray) {
+	 * 
+	 * @return Evolução da Qualidade da Solução 
+	 */
+	public double[] execute() throws Exception {
 
 		double[] s = initSolution(lengthArray);
+		double[] evolutionQuality = new double[iterations];
 		
 		int cont = 0;
-		while (cont < i) {
-			System.out.println(quality(s));
+		while (cont < iterations) {
+			evolutionQuality[cont] = quality(s);
 			double[] r = tweak(copy(s));
 			if (quality(r) < quality(s)) {
 				s = r;
@@ -21,8 +30,8 @@ public abstract class HillClimbing extends BaseAlgorithm {
 			cont++;
 		}
 
-		System.out.println("Qualidade: " + quality(s));
+		return evolutionQuality;
 
 	}
-	
+
 }

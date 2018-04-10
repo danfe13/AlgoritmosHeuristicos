@@ -1,60 +1,41 @@
 package br.ufs.algorithm;
 
-public abstract class SimulatedAnnealing {
+public abstract class SimulatedAnnealing extends BaseAlgorithm {
 
-	/**
-	 * Executa o Simulated Annealing
-	 * @param t				Temperatura
-	 * @param lengthArray 	Tamanho do Array de Solução
-	 * */
-	public void execute(int t, int lengthArray) {
-
-		// some initial candidate solution
-		double[] s = initSolution(lengthArray);
-		double[] best = s;
-
-		while (t <= 0 || quality(best) == 0) {
-			double[] r = tweak(s);
-			if ((quality(r) > quality(s)) || (Math.random() < Math.pow(Math.E, ((quality(r) - quality(s)) / t))))
-				s = r;
-			t--;
-			if (quality(s) < quality(best))
-				best = s;
-		}
-
-		System.out.println(quality(s));
-
-	}
-
-	public double[] initSolution(int length) {
-		double[] s = new double[length];
-		for (int i = 0; i < s.length; i++) {
-			s[i] = Math.random() * 100;
-		}
-		return s;
+	//Temperatura
+	private int temperature;
+	
+	public SimulatedAnnealing(int lengthArray, double p, int range, int min, int max, int temperature) {
+		super(lengthArray, p, range, min, max);
+		this.temperature = temperature;
 	}
 	
-	//Algorithm 8 Bounded Uniform Convolution
-	public double[] tweak(double[] s) {
-		//Probabilidade de adicionar ruído a um elemento no vetor
-		int p = 1;
-		//Range de cada elemento do vetor
-		int r = 100;
-		int min = -100;
-		int max = 100;
-		double n;
-		for (int i = 0; i < s.length; i++) {
-			if (p >= Math.random()) {
-				do {
-					n = Math.random() * r;
-				} while ((min <= s[i] + n) && (max >= s[i] + n));
-				s[i] = s[i] + n;
-			}
-				
+	/**
+	 * Executa o Simulated Annealing
+	 * @return Evolução da Qualidade da Solução
+	 * */
+	public double[] execute() {
+
+		double[] s = initSolution(lengthArray);
+		double[] best = s;
+		double[] evolutionQuality = new double[temperature];
+		
+		int cont = 0;
+
+		while (temperature > 0 || quality(best) == 0) {
+			evolutionQuality[cont] = quality(best);
+			double[] r = tweak(copy(s));
+			if ((quality(r) < quality(s)) || (Math.random() < Math.pow(Math.E, ((quality(r) - quality(s)) / temperature))))
+				s = r;
+			temperature--;
+			if (quality(s) < quality(best))
+				best = s;
+			cont++;
 		}
-		return s;
+		
+		return evolutionQuality;
+
 	}
 
-	public abstract double quality(double[] s);
 
 }
