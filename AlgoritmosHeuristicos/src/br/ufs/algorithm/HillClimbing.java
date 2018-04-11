@@ -15,7 +15,7 @@ public abstract class HillClimbing extends BaseAlgorithm {
 	 * 
 	 * @return Evolução da Qualidade da Solução 
 	 */
-	public double[] execute() throws Exception {
+	public double[] execute() {
 
 		double[] s = initSolution(lengthArray);
 		double[] evolutionQuality = new double[iterations];

@@ -1,8 +1,5 @@
 package br.ufs.algorithm;
 
-import java.awt.font.NumericShaper.Range;
-import java.util.Random;
-
 public abstract class BaseAlgorithm {
 	
 	//Tamanho do Array Solução
@@ -47,8 +44,6 @@ public abstract class BaseAlgorithm {
 		
 	}
 	
-	public abstract double quality(double[] s);
-	
 	//Algorithm 8 Bounded Uniform Convolution
 	public double[] tweak(double[] s) {
 		
@@ -88,5 +83,9 @@ public abstract class BaseAlgorithm {
 		}
 		return num;
 	}
+	
+	public abstract double quality(double[] s);
+	
+	public abstract double[] execute();
 	
 }
