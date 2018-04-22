@@ -40,7 +40,7 @@ public abstract class BaseAlgorithm {
 			else
 				result = result + s[i] + ", ";
 		}
-		System.out.println(result + " - " + quality(s));
+		System.out.println(result);
 		
 	}
 	
@@ -84,8 +84,5 @@ public abstract class BaseAlgorithm {
 		return num;
 	}
 	
-	public abstract double quality(double[] s);
-	
-	public abstract double[] execute();
 	
 }

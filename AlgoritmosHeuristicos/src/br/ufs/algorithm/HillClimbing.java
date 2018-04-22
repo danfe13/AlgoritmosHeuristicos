@@ -1,6 +1,8 @@
 package br.ufs.algorithm;
 
-public abstract class HillClimbing extends BaseAlgorithm {
+import br.ufs.benchmark.Benchmark;
+
+public class HillClimbing extends BaseAlgorithm {
 
 	//Número de Iterações do Algoritmo
 	protected int iterations;
@@ -15,16 +17,16 @@ public abstract class HillClimbing extends BaseAlgorithm {
 	 * 
 	 * @return Evolução da Qualidade da Solução 
 	 */
-	public double[] execute() {
+	public double[] execute(Benchmark function) {
 
 		double[] s = initSolution(lengthArray);
 		double[] evolutionQuality = new double[iterations];
 		
 		int cont = 0;
 		while (cont < iterations) {
-			evolutionQuality[cont] = quality(s);
+			evolutionQuality[cont] = function.quality(s);
 			double[] r = tweak(copy(s));
-			if (quality(r) < quality(s)) {
+			if (function.quality(r) < function.quality(s)) {
 				s = r;
 			}
 			cont++;

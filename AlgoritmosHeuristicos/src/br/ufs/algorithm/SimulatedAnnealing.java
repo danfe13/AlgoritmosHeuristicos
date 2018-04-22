@@ -1,6 +1,8 @@
 package br.ufs.algorithm;
 
-public abstract class SimulatedAnnealing extends BaseAlgorithm {
+import br.ufs.benchmark.Benchmark;
+
+public class SimulatedAnnealing extends BaseAlgorithm {
 
 	//Temperatura
 	private int temperature;
@@ -14,7 +16,7 @@ public abstract class SimulatedAnnealing extends BaseAlgorithm {
 	 * Executa o Simulated Annealing
 	 * @return Evolução da Qualidade da Solução
 	 * */
-	public double[] execute() {
+	public double[] execute(Benchmark function) {
 
 		double[] s = initSolution(lengthArray);
 		double[] best = s;
@@ -22,13 +24,13 @@ public abstract class SimulatedAnnealing extends BaseAlgorithm {
 		
 		int cont = 0;
 
-		while (temperature > 0 || quality(best) == 0) {
-			evolutionQuality[cont] = quality(best);
+		while (temperature > 0 || function.quality(best) == 0) {
+			evolutionQuality[cont] = function.quality(best);
 			double[] r = tweak(copy(s));
-			if ((quality(r) < quality(s)) || (Math.random() < Math.pow(Math.E, ((quality(r) - quality(s)) / temperature))))
+			if ((function.quality(r) < function.quality(s)) || (Math.random() < Math.pow(Math.E, ((function.quality(r) - function.quality(s)) / temperature))))
 				s = r;
 			temperature--;
-			if (quality(s) < quality(best))
+			if (function.quality(s) < function.quality(best))
 				best = s;
 			cont++;
 		}

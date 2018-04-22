@@ -1,12 +1,7 @@
 package br.ufs.benchmark;
 
-import br.ufs.algorithm.HillClimbing;
 
-public class SchwefelsProblemHillClimbing extends HillClimbing{
-
-	public SchwefelsProblemHillClimbing(int lengthArray, double p, int range, int min, int max, int iterations) {
-		super(lengthArray, p, range, min, max, iterations);
-	}
+public class Schwefels implements Benchmark{
 
 	public double quality(double[] s) {
 		double prev_sum, curr_sum, outer_sum;
