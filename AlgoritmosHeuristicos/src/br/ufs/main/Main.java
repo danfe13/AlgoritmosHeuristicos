@@ -14,13 +14,14 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import br.ufs.algorithm.BuscaTabu;
+import br.ufs.algorithm.HillClimbing;
 import br.ufs.benchmark.Sphere;
 
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// TODO Auto-generated method stub
-		BuscaTabu tabu = new BuscaTabu(5, 1, 100, -100, 100, 100, 10);
+		BuscaTabu tabu = new BuscaTabu(5, 1, 100, -100, 100, 100, 100);
 		plotarGrafico(tabu.execute(new Sphere()), "Tabu");
 	}
 	

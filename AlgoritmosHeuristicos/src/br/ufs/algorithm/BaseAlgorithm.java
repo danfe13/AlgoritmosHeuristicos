@@ -46,9 +46,7 @@ public abstract class BaseAlgorithm {
 	
 	//Algorithm 8 Bounded Uniform Convolution
 	public double[] tweak(double[] s) {
-		
 		double n;
-		
 		for (int i = 0; i < s.length; i++) {
 			if (p >= Math.random()) {
 				do {

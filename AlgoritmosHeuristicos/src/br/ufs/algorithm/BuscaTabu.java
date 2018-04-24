@@ -29,7 +29,7 @@ public class BuscaTabu extends BaseAlgorithm {
 		
 		int cont = 0;
 		while (cont < iterations) {
-			evolution[cont] = function.quality(s);
+			evolution[cont] = function.quality(best);
 			if (l.size() > lengthTabu){
 				l.remove();
 			}
@@ -41,7 +41,7 @@ public class BuscaTabu extends BaseAlgorithm {
 				if (l.contains(xw.intValue())){
 					continue;
 				}
-				else if(xw>xr || l.contains(xr.intValue())) {
+				else if(xw<xr || l.contains(xr.intValue())) {
 					r = w;
 					break;
 				}
@@ -49,7 +49,7 @@ public class BuscaTabu extends BaseAlgorithm {
 			if(!l.contains(xr.intValue()))
 				s = r;
 			l.add(xr.intValue());
-			if(function.quality(s) > function.quality(best)) {
+			if(function.quality(s) < function.quality(best)) {
 				best = s;
 			}
 			cont++;

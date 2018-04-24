@@ -29,7 +29,7 @@ public class InteratedLocal extends BaseAlgorithm {
 			evolutionQuality[cont] = function.quality(s);
 			int time = (int) (Math.random() * iterations+1);
 			for(int i =0; i<time; i++) {
-				double[] r = tweak(copy(s));
+				double[] r = tweak(copy(s), min(s), max(s));
 				if (function.quality(r) < function.quality(s)) {
 					s = r;
 				}
@@ -39,6 +39,44 @@ public class InteratedLocal extends BaseAlgorithm {
 
 		return evolutionQuality;
 
+	}
+	
+	public double[] tweak(double[] s, int min, int max) {
+		double n;
+		for (int i = 0; i < s.length; i++) {
+			if (p >= Math.random()) {
+				do {
+					n = random();
+					
+				} while ((s[i] + n < min) || (s[i] + n > max));
+				s[i] = s[i] + n;
+			}
+				
+		}
+		return s;
+		
+	}
+	
+	// getting the maximum value
+	public int max(double[] array) {
+	    double maxValue = array[0];
+	    for (int i = 1; i < array.length; i++) {
+	        if (array[i] > maxValue) {
+	            maxValue = array[i];
+	        }
+	    }
+	    return (int)maxValue;
+	}
+
+	// getting the miniumum value
+	public int min(double[] array) {
+	    double minValue = array[0];
+	    for (int i = 1; i < array.length; i++) {
+	        if (array[i] < minValue) {
+	            minValue = array[i];
+	        }
+	    }
+	    return (int)minValue;
 	}
 
 }
