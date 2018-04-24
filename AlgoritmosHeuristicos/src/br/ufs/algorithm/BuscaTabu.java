@@ -6,16 +6,15 @@ import java.util.Queue;
 public abstract class BuscaTabu extends BaseAlgorithm {
 	
 	//Comprimento máximo da lista tabu
-	private int lengthTabu;
+	private int length;
 	//Numero de Tweak Desejado
-	private int nTweak;
 	
 	private int iteration;
 	
-	public BuscaTabu(int lengthArray, double p, int range, int min, int max, int lengthTabu, int iteration) {
+	public BuscaTabu(int lengthArray, double p, int range, int min, int max, int length) {
 		super(lengthArray, p, range, min, max);
-		this.lengthTabu = lengthTabu;
-		this.iteration = iteration;
+		this.length = length;
+		this.iteration = (int) (Math.random()*1000);
 	}
 	
 	public double[] execute() {
@@ -26,14 +25,14 @@ public abstract class BuscaTabu extends BaseAlgorithm {
 		
 		int count = 0;
 		
-		while (count++ < lengthTabu) {
+		while (count++ < length) {
 		
-			if (tabu.size() > lengthTabu)
+			if (tabu.size() > length)
 				tabu.remove();
 			
 			double[] R = tweak(copy(S));
 			
-			for (int i = 0; i < nTweak; i++) {
+			for (int i = 0; i < iteration; i++) {
 				double[] W = tweak(copy(S));
 				
 				if (!tabu.contains(quality(W)) && (quality(W) > quality(R)) || tabu.contains(quality(R)))
@@ -50,8 +49,7 @@ public abstract class BuscaTabu extends BaseAlgorithm {
 				
 		}
 		
-		return bestSolution;
-		
+		return bestSolution;		
 		
 	}
 
