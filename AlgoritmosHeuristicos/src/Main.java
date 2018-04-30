@@ -11,12 +11,11 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import br.ufs.benchmark.SchwefelsProblemHillClimbing;
-import br.ufs.benchmark.SchwefelsProblemSimulatedAnnealing;
-import br.ufs.benchmark.SchwefelsProblemTabuSearch;
-import br.ufs.benchmark.SphereFunctionHillClimbing;
-import br.ufs.benchmark.SphereFunctionSimulatedAnnealing;
-import br.ufs.benchmark.SphereFunctionTabuSearch;
+import br.ufs.algorithm.HillClimbing;
+import br.ufs.algorithm.SimulatedAnnealing;
+import br.ufs.algorithm.TabuSearch;
+import br.ufs.benchmark.SchwefelsProblem;
+import br.ufs.benchmark.SphereFunction;
 
 public class Main {
 	
@@ -27,33 +26,31 @@ public class Main {
 			int benchmark  = Integer.parseInt(JOptionPane.showInputDialog("Benchmark: \n1 - Sphere Function\n2 - SchwefelsProblem"));
 			int algorithm = Integer.parseInt(JOptionPane.showInputDialog("Algotithm: \n1 - Hill Climbing\n2 - Simulated Annealing\n3 - Busca Tabu"));
 			
+			HillClimbing hillClimbing = new HillClimbing(5, 1, 100, -100, 100, 10000);
+			SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(5, 1, 100, -100, 100, 10000);
+			TabuSearch tabuSearch = new TabuSearch(5, 1, 100, -100, 100, 10, 10000, 4);
+					
 			if(benchmark == 1) {
 				if(algorithm == 1) {
-					SphereFunctionHillClimbing sphereFunctionHC = new SphereFunctionHillClimbing(5, 1, 100, -100, 100, 10000);
-					double[] evolutionQuality = sphereFunctionHC.execute();
+					double[] evolutionQuality = hillClimbing.execute(new SphereFunction());
 					plotarGrafico(evolutionQuality, "Sphere Function witch Hill Climbing");
 				}else if(algorithm == 2) {
-					SphereFunctionSimulatedAnnealing sphereFunctionSA = new SphereFunctionSimulatedAnnealing(5, 1, 100, -100, 100, 10000);
-					double[] evolutionQuality = sphereFunctionSA.execute();
+					double[] evolutionQuality = simulatedAnnealing.execute(new SphereFunction());
 					plotarGrafico(evolutionQuality, "Sphere Function witch Simulated Annealing");
 				}else if(algorithm == 3) {
-					SphereFunctionTabuSearch sphereFunctionT = new SphereFunctionTabuSearch(5, 1, 100, -100, 100, 10, 10000, 4);
-					double[] evolutionQuality = sphereFunctionT.execute();
+					double[] evolutionQuality = tabuSearch.execute(new SphereFunction());
 					plotarGrafico(evolutionQuality, "Sphere Function witch Tabu Search");
 				}
 			}else if(benchmark == 2) {
 				if(algorithm == 1) {
-					SchwefelsProblemHillClimbing schwefelsProblemHC = new SchwefelsProblemHillClimbing(5, 1, 100, -100, 100, 10000);
-					double[] evolutionQuality = schwefelsProblemHC.execute();
+					double[] evolutionQuality = hillClimbing.execute(new SchwefelsProblem());
 					plotarGrafico(evolutionQuality, "Schwefels Problem witch Hill Climbing");
 				}else if(algorithm == 2) {
-					SchwefelsProblemSimulatedAnnealing schwefelsProblemSA = new SchwefelsProblemSimulatedAnnealing(5, 1, 100, -100, 100, 10000);
-					double[] evolutionQuality = schwefelsProblemSA.execute();
+					double[] evolutionQuality = simulatedAnnealing.execute(new SchwefelsProblem());
 					plotarGrafico(evolutionQuality, "SchwefelsProblem witch Simulated Annealing");
 				}
 				else if(algorithm == 3) {
-					SchwefelsProblemTabuSearch schwefelsProblemT = new SchwefelsProblemTabuSearch(5, 1, 100, -100, 100, 10, 10000, 4);
-					double[] evolutionQuality = schwefelsProblemT.execute();
+					double[] evolutionQuality = tabuSearch.execute(new SchwefelsProblem());
 					plotarGrafico(evolutionQuality, "SchwefelsProblem witch Tabu Search");
 				}
 			}

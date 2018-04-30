@@ -3,7 +3,9 @@ package br.ufs.algorithm;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public abstract class TabuSearch extends BaseAlgorithm {
+import br.ufs.benchmark.IBenchmark;
+
+public class TabuSearch extends BaseAlgorithm {
 	
 	//Comprimento máximo da lista tabu
 	private int lengthTabu;
@@ -19,18 +21,18 @@ public abstract class TabuSearch extends BaseAlgorithm {
 		this.nTweak = nTweak;
 	}
 	
-	public double[] execute() {
+	public double[] execute(IBenchmark b) {
 		
 		double[] s = initSolution(lengthArray);
 		double[] best = s;
 		Queue<Integer> tabu = new LinkedList<>(); 
-		tabu.add((int) quality(s));
+		tabu.add((int) b.quality(s));
 		double[] evolutionQuality = new double[iterations];
 		
 		int cont = 0;
 		while(cont < iterations) {
 			
-			evolutionQuality[cont] = quality(best);
+			evolutionQuality[cont] = b.quality(best);
 			
 			if(tabu.size() > lengthTabu) {
 				tabu.remove();
@@ -42,17 +44,17 @@ public abstract class TabuSearch extends BaseAlgorithm {
 
 				double[] w = tweak(copy(s));
 	
-				if((!tabu.contains((int) quality(w))) && (quality(w) < quality(r) || tabu.contains((int) quality(r))))
+				if((!tabu.contains((int) b.quality(w))) && (b.quality(w) < b.quality(r) || tabu.contains((int) b.quality(r))))
 					r = w;
 
 			}
 			
-			if(!tabu.contains((int) quality(r))) {
+			if(!tabu.contains((int) b.quality(r))) {
 				s = r;
-				tabu.add((int) quality(r));
+				tabu.add((int) b.quality(r));
 			}
 			
-			if(quality(s) < quality(best))
+			if(b.quality(s) < b.quality(best))
 				best = s;
 			
 			cont++;

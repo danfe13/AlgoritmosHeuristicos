@@ -1,5 +1,7 @@
 package br.ufs.algorithm;
 
+import br.ufs.benchmark.IBenchmark;
+
 public abstract class BaseAlgorithm {
 	
 	//Tamanho do Array Solução
@@ -31,7 +33,7 @@ public abstract class BaseAlgorithm {
 		
 	}
 	
-	public void print(double[] s) {
+	public void print(double[] s, IBenchmark b) {
 		
 		String result = "[";
 		for (int i = 0; i < s.length; i++) {
@@ -40,7 +42,7 @@ public abstract class BaseAlgorithm {
 			else
 				result = result + s[i] + ", ";
 		}
-		System.out.println(result + " - " + quality(s));
+		System.out.println(result + " - " + b.quality(s));
 		
 	}
 	
@@ -84,8 +86,6 @@ public abstract class BaseAlgorithm {
 		return num;
 	}
 	
-	public abstract double quality(double[] s);
-	
-	public abstract double[] execute();
+	public abstract double[] execute(IBenchmark b);
 	
 }
