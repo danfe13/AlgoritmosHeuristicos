@@ -1,5 +1,6 @@
 package br.ufs.algorithm;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.stream.DoubleStream;
@@ -13,18 +14,20 @@ public class BuscaTabu extends BaseAlgorithm {
 	//Número de Iterações do Algoritmo
 	protected int iterations;
 	
-	public BuscaTabu(int lengthArray, double p, int range, int min, int max, int lengthTabu, int iterations) {
-		super(lengthArray, p, range, min, max);
+	public BuscaTabu(int lengthArray, double p, int min, int max, int lengthTabu, int iterations) {
+		super(lengthArray, p, min, max);
 		this.lengthTabu = lengthTabu;
 		this.iterations = iterations;
 	}
 	
-	public double[] execute(Benchmark function) {
+	public ArrayList<Double> execute(Benchmark function) {
 		
 		double[] s = initSolution(lengthArray);
 		double[] best = s;
 		double[] evolution = new double[iterations];
 		Queue<Integer> l = new LinkedList<Integer>();
+		ArrayList<Double> bests = new ArrayList<Double>();
+		bests.add(function.quality(s));
 		Double xw = 0.0, xr = 0.0;
 		
 		int cont = 0;
@@ -34,28 +37,29 @@ public class BuscaTabu extends BaseAlgorithm {
 				l.remove();
 			}
 			double[] r = tweak(copy(s));
-			for(int i=0; i<lengthTabu*100;i++){
+			for(int i=0; i<lengthTabu;i++){
 				double[] w = tweak(copy(s));
 				xw = function.quality(w);
 				xr = function.quality(r);
 				if (l.contains(xw.intValue())){
 					continue;
 				}
-				else if(xw>xr || l.contains(xr.intValue())) {
+				else if(xw<xr || l.contains(xr.intValue())) {
 					r = w;
-					break;
 				}
 			}
 			if(!l.contains(xr.intValue()))
 				s = r;
 			l.add(xr.intValue());
-			if(function.quality(s) > function.quality(best)) {
+			if(function.quality(s) < function.quality(best)) {
+				bests.add(function.quality(s));
+				System.out.println(function.quality(s));
 				best = s;
 			}
 			cont++;
 		}
 		
-		return evolution;
+		return bests;
 		
 	}
 

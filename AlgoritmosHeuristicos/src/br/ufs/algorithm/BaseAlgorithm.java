@@ -1,5 +1,7 @@
 package br.ufs.algorithm;
 
+import java.util.Random;
+
 public abstract class BaseAlgorithm {
 	
 	//Tamanho do Array Solução
@@ -13,10 +15,9 @@ public abstract class BaseAlgorithm {
 	//Valor max do Array Solução
 	protected int max;
 	
-	public BaseAlgorithm(int lengthArray, double p, int range, int min, int max) {
+	public BaseAlgorithm(int lengthArray, double p, int min, int max) {
 		this.lengthArray = lengthArray;
 		this.p = p;
-		this.range = range;
 		this.min = min;
 		this.max = max;
 	}
@@ -46,9 +47,7 @@ public abstract class BaseAlgorithm {
 	
 	//Algorithm 8 Bounded Uniform Convolution
 	public double[] tweak(double[] s) {
-		
 		double n;
-		
 		for (int i = 0; i < s.length; i++) {
 			if (p >= Math.random()) {
 				do {
@@ -74,14 +73,35 @@ public abstract class BaseAlgorithm {
 	}
 	
 	public double random() {
+		Random random = new Random();
+		return min + (max - min) * random.nextDouble();
+	}
+	
+	/*public double random() {
 		double num;
 		double sinal = Math.random();
 		if (sinal < 0.5 && min < 0) {
-			num = Math.random() * range * -1;
+			num = Math.random() * 100 * -1;
 		} else {
-			num = Math.random() * range * 1;
+			num = Math.random() * 100 * 1;
 		}
 		return num;
+	}*/
+	
+	public int getMin() {
+		return min;
+	}
+
+	public void setMin(int min) {
+		this.min = min;
+	}
+
+	public int getMax() {
+		return max;
+	}
+
+	public void setMax(int max) {
+		this.max = max;
 	}
 	
 	

@@ -1,5 +1,7 @@
 package br.ufs.algorithm;
 
+import java.util.ArrayList;
+
 import br.ufs.benchmark.Benchmark;
 
 public class HillClimbing extends BaseAlgorithm {
@@ -7,8 +9,8 @@ public class HillClimbing extends BaseAlgorithm {
 	//Número de Iterações do Algoritmo
 	protected int iterations;
 	
-	public HillClimbing(int lengthArray, double p, int range, int min, int max, int iterations) {
-		super(lengthArray, p, range, min, max);
+	public HillClimbing(int lengthArray, double p, int min, int max, int iterations) {
+		super(lengthArray, p, min, max);
 		this.iterations = iterations;
 	}
 	
