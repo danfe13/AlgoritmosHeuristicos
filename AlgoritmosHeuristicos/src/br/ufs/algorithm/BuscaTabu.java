@@ -32,7 +32,7 @@ public class BuscaTabu extends BaseAlgorithm {
 		
 		int cont = 0;
 		while (cont < iterations) {
-			evolution[cont] = function.quality(s);
+			evolution[cont] = function.quality(best);
 			if (l.size() > lengthTabu){
 				l.remove();
 			}
