@@ -41,7 +41,7 @@ public class ILS extends BaseAlgorithm {
 	}
 	
 	public double[] perturb(double[] s) {
-		return tweak(copy(s), 1);
+		return tweak(copy(s), 0.7);
 	}
 	
 	public double[] newHomeBase(double[] h, double[] s, IBenchmark b) {

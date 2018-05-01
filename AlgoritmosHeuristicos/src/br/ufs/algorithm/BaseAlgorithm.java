@@ -66,7 +66,7 @@ public abstract class BaseAlgorithm {
 	}
 	
 	//Algorithm 8 Bounded Uniform Convolution
-	public double[] tweak(double[] s, int distance) {
+	public double[] tweak(double[] s, double distance) {
 		
 		double n;
 		
