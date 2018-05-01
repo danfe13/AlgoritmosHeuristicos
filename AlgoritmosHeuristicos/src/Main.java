@@ -12,6 +12,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import br.ufs.algorithm.HillClimbing;
+import br.ufs.algorithm.ILS;
 import br.ufs.algorithm.SimulatedAnnealing;
 import br.ufs.algorithm.TabuSearch;
 import br.ufs.benchmark.SchwefelsProblem;
@@ -24,12 +25,13 @@ public class Main {
 		do {
 			
 			int benchmark  = Integer.parseInt(JOptionPane.showInputDialog("Benchmark: \n1 - Sphere Function\n2 - SchwefelsProblem"));
-			int algorithm = Integer.parseInt(JOptionPane.showInputDialog("Algotithm: \n1 - Hill Climbing\n2 - Simulated Annealing\n3 - Busca Tabu"));
+			int algorithm = Integer.parseInt(JOptionPane.showInputDialog("Algotithm: \n1 - Hill Climbing\n2 - Simulated Annealing\n3 - Busca Tabu\n4 - ILS"));
 			
-			HillClimbing hillClimbing = new HillClimbing(5, 1, 100, -100, 100, 10000);
-			SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(5, 1, 100, -100, 100, 10000);
-			TabuSearch tabuSearch = new TabuSearch(5, 1, 100, -100, 100, 10, 10000, 4);
-					
+			HillClimbing hillClimbing = new HillClimbing(5, 0.5, 100, -100, 100, 10000);
+			SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(5, 0.5, 100, -100, 100, 10000);
+			TabuSearch tabuSearch = new TabuSearch(5, 0.5, 100, -100, 100, 10, 10000, 4);
+			ILS ils = new ILS(5, 0.5, 100, -100, 100, 10000);	
+			
 			if(benchmark == 1) {
 				if(algorithm == 1) {
 					double[] evolutionQuality = hillClimbing.execute(new SphereFunction());
@@ -40,6 +42,9 @@ public class Main {
 				}else if(algorithm == 3) {
 					double[] evolutionQuality = tabuSearch.execute(new SphereFunction());
 					plotarGrafico(evolutionQuality, "Sphere Function witch Tabu Search");
+				}else if(algorithm == 4) {
+					double[] evolutionQuality = ils.execute(new SphereFunction());
+					plotarGrafico(evolutionQuality, "Sphere Function witch ILS");
 				}
 			}else if(benchmark == 2) {
 				if(algorithm == 1) {
@@ -52,6 +57,9 @@ public class Main {
 				else if(algorithm == 3) {
 					double[] evolutionQuality = tabuSearch.execute(new SchwefelsProblem());
 					plotarGrafico(evolutionQuality, "SchwefelsProblem witch Tabu Search");
+				}else if(algorithm == 4) {
+					double[] evolutionQuality = ils.execute(new SchwefelsProblem());
+					plotarGrafico(evolutionQuality, "SchwefelsProblem witch ILS");
 				}
 			}
 		} while (JOptionPane.showConfirmDialog(null, "Deseja Continuar?") == 0);

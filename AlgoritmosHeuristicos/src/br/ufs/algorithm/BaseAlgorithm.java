@@ -65,6 +65,25 @@ public abstract class BaseAlgorithm {
 		
 	}
 	
+	//Algorithm 8 Bounded Uniform Convolution
+	public double[] tweak(double[] s, int distance) {
+		
+		double n;
+		
+		for (int i = 0; i < s.length; i++) {
+			if (distance >= Math.random()) {
+				do {
+					n = random();
+					
+				} while ((s[i] + n < min) || (s[i] + n > max));
+				s[i] = s[i] + n;
+			}
+				
+		}
+		return s;
+		
+	}
+	
 	public double[] copy(double[] s) {
 		
 		double[] r = new double[s.length];

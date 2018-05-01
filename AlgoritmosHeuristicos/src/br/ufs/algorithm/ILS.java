@@ -5,7 +5,7 @@ import br.ufs.benchmark.IBenchmark;
 public class ILS extends BaseAlgorithm {
 
 	//Número de Iterações do Algoritmo
-		protected int iterations;
+	protected int iterations;
 	
 	public ILS(int lengthArray, double p, int range, int min, int max, int iterations) {
 		super(lengthArray, p, range, min, max);
@@ -14,10 +14,8 @@ public class ILS extends BaseAlgorithm {
 
 	public double[] execute(IBenchmark b) {
 		
-		int t = lengthArray;
-		
 		double[] s = initSolution(lengthArray);
-		double[] h = s;
+		double[] h = s; //O "Home Base" corrente
 		double[] best = s;
 		
 		double[] evolutionQuality = new double[iterations];
@@ -33,21 +31,24 @@ public class ILS extends BaseAlgorithm {
 			}
 			if(b.quality(s) < b.quality(best))
 				best = s;
-			h = newHomeBase(h, s);
+			h = newHomeBase(h, s, b);
 			s = perturb(h);
 			cont++;
 		}
 		
-		return null;
+		return evolutionQuality;
 	
 	}
 	
 	public double[] perturb(double[] s) {
-		return null;
+		return tweak(copy(s), 1);
 	}
 	
-	public double[] newHomeBase(double[] h, double[] s) {
-		return null;
+	public double[] newHomeBase(double[] h, double[] s, IBenchmark b) {
+		if(b.quality(s) < b.quality(h))
+			return s;
+		else
+			return h;
 	}
 
 }
