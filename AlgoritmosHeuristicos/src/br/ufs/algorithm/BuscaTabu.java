@@ -12,7 +12,7 @@ public abstract class BuscaTabu extends BaseAlgorithm {
 	private int iteration;
 	
 	public BuscaTabu(int lengthArray, double p, int range, int min, int max, int length) {
-		super(lengthArray, p, range, min, max);
+		super(lengthArray, p, range, min);
 		this.length = length;
 		this.iteration = (int) (Math.random()*1000);
 	}

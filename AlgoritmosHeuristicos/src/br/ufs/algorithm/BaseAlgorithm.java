@@ -13,10 +13,9 @@ public abstract class BaseAlgorithm {
 	//Valor max do Array Solução
 	protected int max;
 	
-	public BaseAlgorithm(int lengthArray, double p, int range, int min, int max) {
+	public BaseAlgorithm(int lengthArray, double p, int min, int max) {
 		this.lengthArray = lengthArray;
 		this.p = p;
-		this.range = range;
 		this.min = min;
 		this.max = max;
 	}

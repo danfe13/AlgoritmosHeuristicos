@@ -6,7 +6,7 @@ public abstract class HillClimbing extends BaseAlgorithm {
 	protected int iterations;
 	
 	public HillClimbing(int lengthArray, double p, int range, int min, int max, int iterations) {
-		super(lengthArray, p, range, min, max);
+		super(lengthArray, p, range, min);
 		this.iterations = iterations;
 	}
 	
