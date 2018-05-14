@@ -27,7 +27,7 @@ public class SimulatedAnnealing extends BaseAlgorithm {
 		while (temperature > 0 || b.quality(best) == 0) {
 			evolutionQuality[cont] = b.quality(best);
 			double[] r = tweak(copy(s));
-			if ((b.quality(r) < b.quality(s)) || (Math.random() < Math.pow(Math.E, ((b.quality(r) - b.quality(s)) / temperature))))
+			if ((b.quality(r) < b.quality(s)) || (Math.random() < Math.pow(Math.E, ((b.quality(s) - b.quality(r)) / temperature))))
 				s = r;
 			temperature--;
 			if (b.quality(s) < b.quality(best))

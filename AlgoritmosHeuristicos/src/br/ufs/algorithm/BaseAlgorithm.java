@@ -61,6 +61,7 @@ public abstract class BaseAlgorithm {
 			}
 				
 		}
+		
 		return s;
 		
 	}
@@ -80,6 +81,7 @@ public abstract class BaseAlgorithm {
 			}
 				
 		}
+		
 		return s;
 		
 	}
