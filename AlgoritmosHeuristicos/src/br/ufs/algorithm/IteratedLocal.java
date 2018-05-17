@@ -17,8 +17,8 @@ public class IteratedLocal extends BaseAlgorithm {
 	protected LinkedList<Integer> maxs;
 	
 	
-	public IteratedLocal(int lengthArray, double p, int min, int max, int iterations) {
-		super(lengthArray, p, min, max);
+	public IteratedLocal(int lengthArray, double p, int min, int max, int iterations, int r) {
+		super(lengthArray, p, min, max, r);
 		this.iterations = iterations;
 	}
 	
@@ -67,7 +67,7 @@ public class IteratedLocal extends BaseAlgorithm {
 		for (int i = 0; i < s.length; i++) {
 			if (p >= Math.random()) {
 				do {
-					n = random();
+					n = random(5);
 				} while ((n < min) || (n > max));
 				s[i] = n;
 			}
@@ -113,7 +113,7 @@ public class IteratedLocal extends BaseAlgorithm {
 		int n;
 		boolean newlocal;
 		do {
-			n = (int)random();
+			n = (int)random(5);
 			newlocal = true;
 			for(int y = 0; y<mins.size(); y++) {
 				if(n>mins.get(y) && n<maxs.get(y)) {

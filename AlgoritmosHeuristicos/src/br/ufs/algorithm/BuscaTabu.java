@@ -14,8 +14,8 @@ public class BuscaTabu extends BaseAlgorithm {
 	//Número de Iterações do Algoritmo
 	protected int iterations;
 	
-	public BuscaTabu(int lengthArray, double p, int min, int max, int lengthTabu, int iterations) {
-		super(lengthArray, p, min, max);
+	public BuscaTabu(int lengthArray, double p, int min, int max, int lengthTabu, int iterations, int r) {
+		super(lengthArray, p, min, max, r);
 		this.lengthTabu = lengthTabu;
 		this.iterations = iterations;
 	}

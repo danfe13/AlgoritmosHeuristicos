@@ -14,19 +14,22 @@ public abstract class BaseAlgorithm {
 	protected int min;
 	//Valor max do Array Solução
 	protected int max;
+	//range dos vizinhos
+	protected int r;
 	
-	public BaseAlgorithm(int lengthArray, double p, int min, int max) {
+	public BaseAlgorithm(int lengthArray, double p, int min, int max, int r) {
 		this.lengthArray = lengthArray;
 		this.p = p;
 		this.min = min;
 		this.max = max;
+		this.r = r;
 	}
 
 	public double[] initSolution(int length) {
 		
 		double[] s = new double[length];
 		for (int i = 0; i < s.length; i++) {
-			s[i] = random();
+			s[i] = random(max);
 		}
 		return s;
 		
@@ -51,7 +54,7 @@ public abstract class BaseAlgorithm {
 		for (int i = 0; i < s.length; i++) {
 			if (p >= Math.random()) {
 				do {
-					n = random();
+					n = random(r);
 					
 				} while ((s[i] + n < min) || (s[i] + n > max));
 				s[i] = s[i] + n;
@@ -72,21 +75,21 @@ public abstract class BaseAlgorithm {
 		
 	}
 	
-	public double random() {
+	/*public double random() {
 		Random random = new Random();
 		return min + (max - min) * random.nextDouble();
-	}
+	}*/
 	
-	/*public double random() {
+	public double random(int r) {
 		double num;
 		double sinal = Math.random();
 		if (sinal < 0.5 && min < 0) {
-			num = Math.random() * 100 * -1;
+			num = Math.random() * r * -1;
 		} else {
-			num = Math.random() * 100 * 1;
+			num = Math.random() * r * 1;
 		}
 		return num;
-	}*/
+	}
 	
 	public int getMin() {
 		return min;

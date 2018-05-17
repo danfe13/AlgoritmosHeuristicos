@@ -26,16 +26,16 @@ public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// TODO Auto-generated method stub
-		IteratedLocal ils = new IteratedLocal(5, 1, -100, 100, 10000);
-		plotarGrafico(ils.execute(new Sphere()), "ILS");
+		/*IteratedLocal ils = new IteratedLocal(5, 1, -100, 100, 10000);
+		plotarGrafico(ils.execute(new Sphere()), "ILS");*/
 		
 		//BuscaTabu tabu = new BuscaTabu(5, 1, -100, 100, 100, 100000);
 		//plotarGrafico(tabu.execute(new Sphere()), "Tabu");
 		
-		/*HillClimbing hill = new HillClimbing(5, 1, -100, 100, 10);
+		HillClimbing hill = new HillClimbing(100, 0.01, -100, 100, 100000, 5);
 		plotarGrafico(hill.execute(new Sphere()), "HillClimbing");
 		
-		SimulatedAnnealing simulated = new SimulatedAnnealing(5, 1, -100, 100, 10);
+		/*SimulatedAnnealing simulated = new SimulatedAnnealing(5, 1, -100, 100, 10);
 		plotarGrafico(simulated.execute(new Sphere()), "Simulated");*/
 	}
 	
