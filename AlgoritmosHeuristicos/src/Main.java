@@ -35,16 +35,24 @@ public class Main {
 					double[] s = simulatedAnnealing.execute(1);
 					plotarGrafico(s, "Sphere Function with Simulated Annealing");
 				}else if(algorithm == 3) {
-					BuscaTabu tabu = new BuscaTabu(100,0.1,-100,100,5,100,10000);
+					BuscaTabu tabu = new BuscaTabu(100,0.1,-100,100,5,10,100,5);
 					double[] s = tabu.execute(1);
 					plotarGrafico(s, "Sphere Function with Tabu Search");
 				}
 				
 			}else if(benchmark == 2) {
 				if(algorithm == 1) {
-					
+					HillClimbing climbing = new HillClimbing(100, 0.1, -100, 100,5, 100000);
+					double[] s = climbing.execute(2);
+					plotarGrafico(s, "SchwefelsProblem with Hill Climbing");
 				}else if(algorithm == 2) {
-					
+					SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(100, 0.1, 100, -100, 100, 100);;
+					double[] s = simulatedAnnealing.execute(2);
+					plotarGrafico(s, "SchwefelsProblem with Simulated Annealing");
+				}else if(algorithm == 3) {
+					BuscaTabu tabu = new BuscaTabu(100,0.1,-100,100,5,10,100,5);
+					double[] s = tabu.execute(2);
+					plotarGrafico(s, "SchwefelsProblem with Tabu Search");
 				}
 			}
 		} while (JOptionPane.showConfirmDialog(null, "Deseja Continuar?") == 0);

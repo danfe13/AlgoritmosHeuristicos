@@ -9,12 +9,15 @@ public class BuscaTabu extends BaseAlgorithm {
 	private int lengthTabu;
 	//Numero de Tweak Desejado
 	
-	private int iteration;
+	private int iterations;
 	
-	public BuscaTabu(int lengthArray, double p, int min, int max, int range, int lengthTabu, int iterations) {
+	private int nTweaks;
+	
+	public BuscaTabu(int lengthArray, double p, int min, int max, int range, int lengthTabu, int iterations, int nTweaks) {
 		super(lengthArray, p, min,max,range);
 		this.lengthTabu = lengthTabu;
-		this.iteration = iterations;
+		this.iterations = iterations;
+		this.nTweaks = nTweaks;
 		
 	}
 	
@@ -26,14 +29,14 @@ public class BuscaTabu extends BaseAlgorithm {
 		
 		int count = 0;
 		
-		while (count++ < lengthTabu) {
+		while (count++ < iterations) {
 		
 			if (tabu.size() > lengthTabu)
 				tabu.remove();
 			
 			double[] R = tweak(copy(S));
 			
-			for (int i = 0; i < iteration; i++) {
+			for (int i = 0; i < nTweaks; i++) {
 				double[] W = tweak(copy(S));
 				
 				if (!tabu.contains(quality(W,option)) && (quality(W,option) > quality(R,option)) || tabu.contains(quality(R,option)))
