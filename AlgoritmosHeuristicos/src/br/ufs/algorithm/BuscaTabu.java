@@ -3,21 +3,22 @@ package br.ufs.algorithm;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public abstract class BuscaTabu extends BaseAlgorithm {
+public class BuscaTabu extends BaseAlgorithm {
 	
 	//Comprimento máximo da lista tabu
-	private int length;
+	private int lengthTabu;
 	//Numero de Tweak Desejado
 	
 	private int iteration;
 	
-	public BuscaTabu(int lengthArray, double p, int range, int min, int max, int length) {
-		super(lengthArray, p, range, min);
-		this.length = length;
-		this.iteration = (int) (Math.random()*1000);
+	public BuscaTabu(int lengthArray, double p, int min, int max, int range, int lengthTabu, int iterations) {
+		super(lengthArray, p, min,max,range);
+		this.lengthTabu = lengthTabu;
+		this.iteration = iterations;
+		
 	}
 	
-	public double[] execute() {
+	public double[] execute(int option) {
 	
 		double[] S = initSolution(lengthArray);
 		double[] bestSolution = S;
@@ -25,9 +26,9 @@ public abstract class BuscaTabu extends BaseAlgorithm {
 		
 		int count = 0;
 		
-		while (count++ < length) {
+		while (count++ < lengthTabu) {
 		
-			if (tabu.size() > length)
+			if (tabu.size() > lengthTabu)
 				tabu.remove();
 			
 			double[] R = tweak(copy(S));
@@ -35,16 +36,16 @@ public abstract class BuscaTabu extends BaseAlgorithm {
 			for (int i = 0; i < iteration; i++) {
 				double[] W = tweak(copy(S));
 				
-				if (!tabu.contains(quality(W)) && (quality(W) > quality(R)) || tabu.contains(quality(R)))
+				if (!tabu.contains(quality(W,option)) && (quality(W,option) > quality(R,option)) || tabu.contains(quality(R,option)))
 					R = W;
 			}
 			
-			if (!tabu.contains(quality(R))) {
+			if (!tabu.contains(quality(R,option))) {
 				S = R;
-				tabu.add(quality(R));
+				tabu.add(quality(R,option));
 			}
 			
-			if (quality(S) > quality(bestSolution))
+			if (quality(S,option) > quality(bestSolution,option))
 				bestSolution = S;
 				
 		}

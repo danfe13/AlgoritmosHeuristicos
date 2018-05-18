@@ -4,33 +4,38 @@ public abstract class BaseAlgorithm {
 	
 	//Tamanho do Array Solução
 	protected int lengthArray;
+	
 	//Probabilidade de adicionar ruído a um elemento no Array
 	protected double p;
-	//Range de cada elemento do Array Solução
-	protected int range;
+	
 	//Valor min do Array Solução
 	protected int min;
+	
 	//Valor max do Array Solução
 	protected int max;
 	
-	public BaseAlgorithm(int lengthArray, double p, int min, int max) {
+	//Range de cada elemento do Array Solução
+	protected int range;
+	
+	public BaseAlgorithm(int lengthArray, double p, int min, int max, int range) {
 		this.lengthArray = lengthArray;
 		this.p = p;
 		this.min = min;
 		this.max = max;
+		this.range = range;
 	}
 
 	public double[] initSolution(int length) {
 		
 		double[] s = new double[length];
 		for (int i = 0; i < s.length; i++) {
-			s[i] = random();
+			s[i] = random(range);
 		}
 		return s;
 		
 	}
 	
-	public void print(double[] s) {
+	public void print(double[] s, int option) {
 		
 		String result = "[";
 		for (int i = 0; i < s.length; i++) {
@@ -39,7 +44,7 @@ public abstract class BaseAlgorithm {
 			else
 				result = result + s[i] + ", ";
 		}
-		System.out.println(result + " - " + quality(s));
+		System.out.println(result + " - " + quality(s,option));
 		
 	}
 	
@@ -51,7 +56,7 @@ public abstract class BaseAlgorithm {
 		for (int i = 0; i < s.length; i++) {
 			if (p >= Math.random()) {
 				do {
-					n = random();
+					n = random(range);
 					
 				} while ((s[i] + n < min) || (s[i] + n > max));
 				s[i] = s[i] + n;
@@ -72,7 +77,7 @@ public abstract class BaseAlgorithm {
 		
 	}
 	
-	public double random() {
+	public double random(int range) {
 		double num;
 		double sinal = Math.random();
 		if (sinal < 0.5 && min < 0) {
@@ -83,8 +88,61 @@ public abstract class BaseAlgorithm {
 		return num;
 	}
 	
-	public abstract double quality(double[] s);
+	public double quality(double[] s, int option) {
+		switch (option) {
+		case 1:
+			return qualitySphere(s);
+		case 2:
+			return qualitySchwefels(s);
+		case 3:
+			return qualityRosenbrock(s);	
+		default:
+			return qualityRastrigin(s);
+		}
+	}
+
+	public double qualitySchwefels(double[] s) {
+		double prev_sum, curr_sum, outer_sum;
+
+		curr_sum = s[0];
+		outer_sum = (curr_sum * curr_sum);
+
+		for (int i = 1; i < s.length; i++) {
+			prev_sum = curr_sum;
+			curr_sum = prev_sum + s[i];
+			outer_sum += (curr_sum * curr_sum);
+		}
+
+		return (outer_sum);
+	}
+
+	public double qualitySphere(double[] s) {
+		double sum = 0.0;
+		for (int i = 0; i < s.length; i++) {
+			sum += s[i] * s[i];
+		}
+		return (sum);
+	}
 	
-	public abstract double[] execute();
+	public double qualityRosenbrock(double[] s) {
+		double sum = 0.0;
+
+		for (int i = 0; i < s.length - 1; i++) {
+			double temp1 = (s[i] * s[i]) - s[i + 1];
+			double temp2 = s[i] - 1.0;
+			sum += (100.0 * temp1 * temp1) + (temp2 * temp2);
+		}
+		return sum;
+	}
+	
+	public double qualityRastrigin(double[] s) {
+		double sum = 0.0;
+
+		for (int i = 0; i < s.length; i++) {
+			sum = Math.pow(s[i], 2.0) - 10.0 * Math.cos(2 * Math.PI * s[i]);
+		}
+		return sum;
+	}
+	
 	
 }
