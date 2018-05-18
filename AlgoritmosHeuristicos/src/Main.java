@@ -35,7 +35,7 @@ public class Main {
 					double[] s = simulatedAnnealing.execute(1);
 					plotarGrafico(s, "Sphere Function with Simulated Annealing");
 				}else if(algorithm == 3) {
-					BuscaTabu tabu = new BuscaTabu(100,0.1,-100,100,5,100,1000);
+					BuscaTabu tabu = new BuscaTabu(100,0.1,-100,100,5,100,10000);
 					double[] s = tabu.execute(1);
 					plotarGrafico(s, "Sphere Function with Tabu Search");
 				}
