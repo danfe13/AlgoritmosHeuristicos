@@ -22,8 +22,8 @@ public class Main {
 		
 		do {
 			
-			int benchmark  = Integer.parseInt(JOptionPane.showInputDialog("Benchmark: \n1 - Sphere Function\n2 - SchwefelsProblem"));
-			int algorithm = Integer.parseInt(JOptionPane.showInputDialog("Algotithm: \n1 - Hill Climbing\n2 - Simulated Annealing\n3 - Tabu Search"));
+			int benchmark  = Integer.parseInt(JOptionPane.showInputDialog("Benchmark: \n1 - Sphere Function\n2 - SchwefelsProblem\n3 - Rosenbrock\n4 - Rastrigin"));
+			int algorithm = Integer.parseInt(JOptionPane.showInputDialog("Algotithm: \n1 - Hill Climbing\n2 - Simulated Annealing\n3 - Tabu Search\n4 - ILS"));
 			
 			if(benchmark == 1) {
 				if(algorithm == 1) {
@@ -46,13 +46,41 @@ public class Main {
 					double[] s = climbing.execute(2);
 					plotarGrafico(s, "SchwefelsProblem with Hill Climbing");
 				}else if(algorithm == 2) {
-					SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(100, 0.1, 100, -100, 100, 100);;
+					SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(100, 0.1, 100, -100, 100, 100);
 					double[] s = simulatedAnnealing.execute(2);
 					plotarGrafico(s, "SchwefelsProblem with Simulated Annealing");
 				}else if(algorithm == 3) {
 					BuscaTabu tabu = new BuscaTabu(100,0.1,-100,100,5,10,100,5);
 					double[] s = tabu.execute(2);
 					plotarGrafico(s, "SchwefelsProblem with Tabu Search");
+				}
+			}else if(benchmark == 3) {
+				if(algorithm == 1) {
+					HillClimbing climbing = new HillClimbing(100, 0.1, -100, 100,5, 100000);
+					double[] s = climbing.execute(3);
+					plotarGrafico(s, "Rosenbrock with Hill Climbing");
+				}else if(algorithm == 2) {
+					SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(100, 0.1, 100, -100, 100, 100);;
+					double[] s = simulatedAnnealing.execute(3);
+					plotarGrafico(s, "Rosenbrock with Simulated Annealing");
+				}else if(algorithm == 3) {
+					BuscaTabu tabu = new BuscaTabu(100,0.1,-100,100,5,10,100,5);
+					double[] s = tabu.execute(3);
+					plotarGrafico(s, "Rosenbrock with Tabu Search");
+				}
+			}else {
+				if(algorithm == 1) {
+					HillClimbing climbing = new HillClimbing(100, 0.1, -100, 100,5, 100000);
+					double[] s = climbing.execute(4);
+					plotarGrafico(s, "Rastrigin with Hill Climbing");
+				}else if(algorithm == 2) {
+					SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(100, 0.1, 100, -100, 100, 100);;
+					double[] s = simulatedAnnealing.execute(4);
+					plotarGrafico(s, "Rastrigin with Simulated Annealing");
+				}else if(algorithm == 3) {
+					BuscaTabu tabu = new BuscaTabu(100,0.1,-100,100,5,10,100,5);
+					double[] s = tabu.execute(4);
+					plotarGrafico(s, "Rastrigin with Tabu Search");
 				}
 			}
 		} while (JOptionPane.showConfirmDialog(null, "Deseja Continuar?") == 0);

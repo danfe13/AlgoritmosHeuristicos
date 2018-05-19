@@ -2,28 +2,19 @@ package br.ufs.algorithm;
 
 public class ILS extends BaseAlgorithm {
 
-	//Numero de Tweak Desejado
-
-	private int iteration;
+	private int iterations;
 	private int[] maxValues;
 	private int[] minValues;
 
-	public ILS(int lengthArray, double p, int range, int min, int max) {
-		super(lengthArray, p, range, min);
+	public ILS(int lengthArray, double p, int min, int max, int range, int iterations) {
+		super(lengthArray, p, min,max, range);
 		// TODO Auto-generated constructor stub
-		this.iteration = (int) (Math.random()*1000);
+		this.iterations = iterations;
 
 
 	}
 
-	@Override
-	public double quality(double[] s) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public double[] execute() {
+	public double[] execute(int option) {
 
 		double[] S = initSolution(lengthArray);
 		double[] H = S;
@@ -32,14 +23,16 @@ public class ILS extends BaseAlgorithm {
 		int count = 0, count2 = 0;
 		int time = (int) (Math.random()*1000);
 
-		while(count++ < iteration) {
+		while(count++ < iterations) {
 			while(count2++ < time) {
-				double[] R = tweak(copy(S));
-				if (quality(R) > quality(S))
+				double[] R = tweak(copy(S),getMinValue(S),getMaxValue(S));
+				if (quality(R,option) > quality(S,option))
 					S = R;
 			}
-			if (quality(S) > quality(bestSolution))
+			if (quality(S,option) > quality(bestSolution,option))
 				bestSolution = S;
+			H = newHomeBase(H, S, option);
+			S = perturb(H);
 		}
 		return bestSolution;
 	}
@@ -51,7 +44,7 @@ public class ILS extends BaseAlgorithm {
 		for (int i = 0; i < s.length; i++) {
 			if (p >= Math.random()) {
 				do {
-					n = random();
+					n = random(range);
 
 				} while ((s[i] + n < minValue) || (s[i] + n > minValue));
 				s[i] = s[i] + n;
@@ -62,8 +55,8 @@ public class ILS extends BaseAlgorithm {
 
 	}
 
-	public int getMaxValue(int[] maxValues) {
-		int maxValue = maxValues[0];
+	public int getMaxValue(double[] maxValues) {
+		double maxValue = maxValues[0];
 
 		for (int i = 1; i < maxValues.length; i++) {
 
@@ -71,11 +64,11 @@ public class ILS extends BaseAlgorithm {
 				maxValue = maxValues[i];
 			}
 		}
-		return maxValue;
+		return (int) maxValue;
 	}
 
-	public int getMinValue(int[] minValues) {
-		int minValue = minValues[0];
+	public int getMinValue(double[] minValues) {
+		double minValue = minValues[0];
 
 		for (int i = 1; i < minValues.length; i++) {
 
@@ -83,7 +76,18 @@ public class ILS extends BaseAlgorithm {
 				minValue = minValues[i];
 			}
 		}
-		return minValue;
+		return (int) minValue;
+	}
+	
+	public double[] perturb(double[] s) {
+		return tweak(copy(s));
+	}
+	
+	public double[] newHomeBase(double[] h, double[] s, int option) {
+		if(quality(s,option) < quality(h,option))
+			return s;
+		else
+			return h;
 	}
 
 
