@@ -7,8 +7,8 @@ public class HillClimbing extends BaseAlgorithm {
 	//Número de Iterações do Algoritmo
 	protected int iterations;
 	
-	public HillClimbing(int lengthArray, double p, int range, int min, int max, int iterations) {
-		super(lengthArray, p, range, min, max);
+	public HillClimbing(int lengthArray, double p, int rangeSolution, int min, int max, int rangeTweak, int iterations) {
+		super(lengthArray, p, rangeSolution, min, max, rangeTweak);
 		this.iterations = iterations;
 	}
 	

@@ -7,9 +7,12 @@ public class ILS extends BaseAlgorithm {
 	//Número de Iterações do Algoritmo
 	protected int iterations;
 	
-	public ILS(int lengthArray, double p, int range, int min, int max, int iterations) {
-		super(lengthArray, p, range, min, max);
+	private double distancePertub;
+	
+	public ILS(int lengthArray, double p, int rangeSolution, int min, int max, int rangeTweak, int iterations, double distancePertub) {
+		super(lengthArray, p, rangeSolution, min, max, rangeTweak);
 		this.iterations = iterations;
+		this.distancePertub = distancePertub;
 	}
 
 	public double[] execute(IBenchmark b) {
@@ -41,7 +44,7 @@ public class ILS extends BaseAlgorithm {
 	}
 	
 	public double[] perturb(double[] s) {
-		return tweak(copy(s), 0.7);
+		return tweak(copy(s), distancePertub);
 	}
 	
 	public double[] newHomeBase(double[] h, double[] s, IBenchmark b) {

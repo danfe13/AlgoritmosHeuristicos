@@ -14,8 +14,8 @@ public class TabuSearch extends BaseAlgorithm {
 	//Número de Iterações do Algoritmo
 	protected int iterations;
 	
-	public TabuSearch(int lengthArray, double p, int range, int min, int max, int lengthTabu, int iterations, int nTweak) {
-		super(lengthArray, p, range, min, max);
+	public TabuSearch(int lengthArray, double p, int rangeSolution, int min, int max, int rangeTweak, int lengthTabu, int iterations, int nTweak) {
+		super(lengthArray, p, rangeSolution, min, max, rangeTweak);
 		this.lengthTabu = lengthTabu;
 		this.iterations = iterations;
 		this.nTweak = nTweak;
@@ -40,7 +40,7 @@ public class TabuSearch extends BaseAlgorithm {
 			
 			double[] r = tweak(copy(s));
 			
-			for (int i = 0; i < nTweak-1; i++) {
+			for (int i = 0; i < nTweak; i++) {
 
 				double[] w = tweak(copy(s));
 	
