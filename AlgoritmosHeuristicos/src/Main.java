@@ -57,11 +57,11 @@ public class Main {
 				}
 			}else if(benchmark == 2) {
 				if(algorithm == 1) {
-					hillClimbing = new HillClimbing(100, 0.4, 100, -100, 100, 1, 100000);
+					hillClimbing = new HillClimbing(100, 0.1, 100, -100, 100, 1, 100000);
 					double[] evolutionQuality = hillClimbing.execute(new SchwefelsProblem());
 					plotarGrafico(evolutionQuality, "Schwefels Problem witch Hill Climbing");
 				}else if(algorithm == 2) {
-					simulatedAnnealing = new SimulatedAnnealing(100, 0.9, 100, -100, 100, 5, 100000, 100);
+					simulatedAnnealing = new SimulatedAnnealing(100, 0.1, 100, -100, 100, 4, 100000, 100);
 					double[] evolutionQuality = simulatedAnnealing.execute(new SchwefelsProblem());
 					plotarGrafico(evolutionQuality, "SchwefelsProblem witch Simulated Annealing");
 				}
@@ -121,6 +121,7 @@ public class Main {
 	}
 	
 	public static void plotarGrafico(double[] evolutionQuality, String algoritmo) throws FileNotFoundException, IOException {
+		/*
 		DefaultCategoryDataset ds = new DefaultCategoryDataset();
 		
 		FileWriter arq = new FileWriter("resultado.txt");
@@ -144,6 +145,9 @@ public class Main {
 
 		ImageIcon imagem = new ImageIcon("grafico.png");
 		JOptionPane.showMessageDialog(null, "", "", JOptionPane.INFORMATION_MESSAGE, imagem);	
+		*/
+		
+		System.out.println("RESULTADO: " + evolutionQuality[evolutionQuality.length-1]);
 		
 	}
 
