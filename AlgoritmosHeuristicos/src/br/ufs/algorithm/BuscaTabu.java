@@ -25,12 +25,15 @@ public class BuscaTabu extends BaseAlgorithm {
 	
 		double[] S = initSolution(lengthArray);
 		double[] bestSolution = S;
+		double[] evolution = new double[iterations];
 		Queue<Object> tabu = new LinkedList<Object>();
-		
+		tabu.add(quality(S, option));
 		int count = 0;
 		
-		while (count++ < iterations) {
-		
+		while (count < iterations) {
+			evolution[count] = quality(bestSolution,option);
+			
+			System.out.println(quality(bestSolution, option)+" "+count);
 			if (tabu.size() > lengthTabu)
 				tabu.remove();
 			
@@ -39,21 +42,22 @@ public class BuscaTabu extends BaseAlgorithm {
 			for (int i = 0; i < nTweaks; i++) {
 				double[] W = tweak(copy(S));
 				
-				if (!tabu.contains(quality(W,option)) && (quality(W,option) > quality(R,option)) || tabu.contains(quality(R,option)))
+				if (!tabu.contains(quality(W,option)) && (quality(W,option) < quality(R,option)) || tabu.contains(quality(R,option)))
 					R = W;
 			}
 			
 			if (!tabu.contains(quality(R,option))) {
 				S = R;
-				tabu.add(quality(R,option));
 			}
+			tabu.add(quality(R,option));
 			
-			if (quality(S,option) > quality(bestSolution,option))
+			if (quality(S,option) < quality(bestSolution,option))
 				bestSolution = S;
 				
+		count++;
 		}
 		
-		return bestSolution;		
+		return evolution;		
 		
 	}
 
