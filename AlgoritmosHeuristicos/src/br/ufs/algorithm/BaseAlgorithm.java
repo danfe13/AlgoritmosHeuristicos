@@ -14,9 +14,9 @@ public abstract class BaseAlgorithm {
 	protected int min;
 	//Valor max do Array Solução
 	protected int max;
-	protected int rangeTweak;
+	protected double rangeTweak;
 	
-	public BaseAlgorithm(int lengthArray, double p, int rangeSolution, int min, int max, int rangeTweak) {
+	public BaseAlgorithm(int lengthArray, double p, int rangeSolution, int min, int max, double rangeTweak) {
 		this.lengthArray = lengthArray;
 		this.p = p;
 		this.rangeSolution = rangeSolution;
@@ -98,7 +98,7 @@ public abstract class BaseAlgorithm {
 		
 	}
 	
-	public double random(int r) {
+	public double random(double r) {
 		double num;
 		double sinal = Math.random();
 		if (sinal < 0.5 && min < 0) {

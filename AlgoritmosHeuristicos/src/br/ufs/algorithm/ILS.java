@@ -9,7 +9,7 @@ public class ILS extends BaseAlgorithm {
 	
 	private double distancePertub;
 	
-	public ILS(int lengthArray, double p, int rangeSolution, int min, int max, int rangeTweak, int iterations, double distancePertub) {
+	public ILS(int lengthArray, double p, int rangeSolution, int min, int max, double rangeTweak, int iterations, double distancePertub) {
 		super(lengthArray, p, rangeSolution, min, max, rangeTweak);
 		this.iterations = iterations;
 		this.distancePertub = distancePertub;

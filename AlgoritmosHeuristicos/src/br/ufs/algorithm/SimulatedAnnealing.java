@@ -9,7 +9,7 @@ public class SimulatedAnnealing extends BaseAlgorithm {
 	//Temperatura
 	private double temperature;
 	
-	public SimulatedAnnealing(int lengthArray, double p, int rangeSolution, int min, int max, int rangeTweak, int iterations, double temperature) {
+	public SimulatedAnnealing(int lengthArray, double p, int rangeSolution, int min, int max, double rangeTweak, int iterations, double temperature) {
 		super(lengthArray, p, rangeSolution, min, max, rangeTweak);
 		this.iterations = iterations;
 		this.temperature = temperature;
