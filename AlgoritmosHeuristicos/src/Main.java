@@ -41,7 +41,6 @@ public class Main {
 					plotarGrafico(s, "Sphere Function with Tabu Search");
 				}else {
 					ILS ils = new ILS(100, 0.01, -100,  100, 1, 100000);
-				
 					double[] s = ils.execute(1);
 					plotarGrafico(s, "Sphere Function with Iterated Local Search");
 				}
