@@ -19,22 +19,33 @@ public class ILS extends BaseAlgorithm {
 		double[] S = initSolution(lengthArray);
 		double[] H = S;
 		double[] bestSolution = S;
+		double[] evolutionQuality = new double[iterations];
 
-		int count = 0, count2 = 0;
-		int time = (int) (Math.random()*1000);
+		int count = 0; 
+		
 
-		while(count++ < iterations) {
-			while(count2++ < time) {
+		while(count < iterations) {
+			int count2 = 0;
+			evolutionQuality[count] = quality(bestSolution, option);
+			System.out.println(quality(bestSolution, option));
+			int time = (int) (Math.random()*100);
+			
+			while(count2 < time) {
+				System.out.println(count2+" "+time);
 				double[] R = tweak(copy(S),getMinValue(S),getMaxValue(S));
 				if (quality(R,option) > quality(S,option))
 					S = R;
+				count2++;
 			}
+			
 			if (quality(S,option) > quality(bestSolution,option))
 				bestSolution = S;
 			H = newHomeBase(H, S, option);
 			S = perturb(H);
+			count++;
 		}
-		return bestSolution;
+
+		return evolutionQuality;
 	}
 
 	public double[] tweak(double[] s, int minValue, int maxValue) {
@@ -80,7 +91,7 @@ public class ILS extends BaseAlgorithm {
 	}
 	
 	public double[] perturb(double[] s) {
-		return tweak(copy(s));
+		return super.tweak(copy(s));
 	}
 	
 	public double[] newHomeBase(double[] h, double[] s, int option) {
