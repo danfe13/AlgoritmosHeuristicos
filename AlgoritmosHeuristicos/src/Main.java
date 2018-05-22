@@ -57,7 +57,7 @@ public class Main {
 				}
 			}else if(benchmark == 2) {
 				if(algorithm == 1) {
-					hillClimbing = new HillClimbing(100, 0.1, 100, -100, 100, 1, 100000);
+					hillClimbing = new HillClimbing(100, 0.1, 100, -100, 100, 5, 100000);
 					double[] evolutionQuality = hillClimbing.execute(new SchwefelsProblem());
 					plotarGrafico(evolutionQuality, "Schwefels Problem witch Hill Climbing");
 				}else if(algorithm == 2) {
