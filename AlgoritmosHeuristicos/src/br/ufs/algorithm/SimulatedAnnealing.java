@@ -22,6 +22,7 @@ public class SimulatedAnnealing extends BaseAlgorithm {
 		
 		int cont = 0;
 		while (temperature > 0 || quality(best,option) == 0) {
+			System.out.println(quality(best,option)+" "+cont);
 			evolutionQuality[cont] = quality(best,option);
 			double[] r = tweak(copy(s));
 			if ((quality(r,option) < quality(s,option)) || (Math.random() < Math.pow(Math.E, ((quality(r,option) - quality(s,option)) / temperature))))
@@ -29,7 +30,6 @@ public class SimulatedAnnealing extends BaseAlgorithm {
 			temperature--;
 			if (quality(s,option) < quality(best,option))
 				best = s;
-			//System.out.println(evolutionQuality[cont]);
 			cont++;
 		}
 	

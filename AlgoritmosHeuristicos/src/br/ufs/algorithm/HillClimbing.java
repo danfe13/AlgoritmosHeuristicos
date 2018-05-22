@@ -25,6 +25,7 @@ public class HillClimbing extends BaseAlgorithm {
 
 		int cont = 0;
 		while (cont < iterations) {
+			System.out.println(quality(s,option)+" "+cont);
 			evolutionQuality[cont] = quality(s,option);
 			double[] r = tweak(copy(s));
 			if (quality(r,option) < quality(s,option)) {

@@ -112,7 +112,6 @@ public abstract class BaseAlgorithm {
 			curr_sum = prev_sum + s[i];
 			outer_sum += (curr_sum * curr_sum);
 		}
-
 		return (outer_sum);
 	}
 

@@ -27,11 +27,11 @@ public class Main {
 			
 			if(benchmark == 1) {
 				if(algorithm == 1) {
-					HillClimbing climbing = new HillClimbing(100, 0.1, -100, 100,5, 100000);
+					HillClimbing climbing = new HillClimbing(100, 0.01, -100, 100,5, 100000);
 					double[] s = climbing.execute(1);
 					plotarGrafico(s, "Sphere Function with Hill Climbing");
 				}else if(algorithm == 2) {
-					SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(100, 0.1, 100, -100, 100, 100);;
+					SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(100, 0.01,-100, 100,1,100000);
 					double[] s = simulatedAnnealing.execute(1);
 					plotarGrafico(s, "Sphere Function with Simulated Annealing");
 				}else if(algorithm == 3) {
@@ -42,7 +42,7 @@ public class Main {
 				
 			}else if(benchmark == 2) {
 				if(algorithm == 1) {
-					HillClimbing climbing = new HillClimbing(100, 0.1, -100, 100,5, 100000);
+					HillClimbing climbing = new HillClimbing(100, 0.01, -100, 100,5, 100000);
 					double[] s = climbing.execute(2);
 					plotarGrafico(s, "SchwefelsProblem with Hill Climbing");
 				}else if(algorithm == 2) {
@@ -56,7 +56,7 @@ public class Main {
 				}
 			}else if(benchmark == 3) {
 				if(algorithm == 1) {
-					HillClimbing climbing = new HillClimbing(100, 0.1, -100, 100,5, 100000);
+					HillClimbing climbing = new HillClimbing(100, 0.01, -100, 100,1, 100000);
 					double[] s = climbing.execute(3);
 					plotarGrafico(s, "Rosenbrock with Hill Climbing");
 				}else if(algorithm == 2) {
