@@ -41,7 +41,6 @@ public class IteratedLocal extends BaseAlgorithm {
 		mins.add(min(s));
 		maxs.add(max(s));
 		bests.add(function.quality(s));
-		System.out.println(function.quality(s));
 		int cont = 0;
 		do{
 			evolutionQuality.add(function.quality(s));

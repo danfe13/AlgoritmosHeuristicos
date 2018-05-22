@@ -16,6 +16,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import br.ufs.algorithm.BuscaTabu;
 import br.ufs.algorithm.HillClimbing;
+import br.ufs.algorithm.ILS;
 import br.ufs.algorithm.IteratedLocal;
 import br.ufs.algorithm.SimulatedAnnealing;
 import br.ufs.benchmark.Benchmark;
@@ -28,13 +29,13 @@ public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// TODO Auto-generated method stub
-		//simulated(new Rastrigin(), 0.5);
+		//simulated(new Rastrigin(), 0.1);
 		
-		//buscaTabu(new Rastrigin(), 0.001);
+		//buscaTabu(new Rastrigin(), 0.1);
 		
-		//ils(new Sphere(), 0.01);
+		ils(new Rastrigin(), 0.1);
 		
-		//hill(new Rosenbrocks(), 0.01);
+		//hill(new Rastrigin(), 0.1);
 		
 	}
 	
@@ -50,35 +51,35 @@ public class Main {
 	}
 	
 	public static void buscaTabu(Benchmark bench, double p) {
-		BuscaTabu busca = new BuscaTabu(100, p, -5, 5, 10, 10000, 1);
+		BuscaTabu busca = new BuscaTabu(100, p, -5, 5, 30, 100000, 1);
 		report(busca.execute(bench), 1);
 		
-		BuscaTabu busca2 = new BuscaTabu(100, p, -5, 5, 10, 10000, 5);
+		BuscaTabu busca2 = new BuscaTabu(100, p, -5, 5, 30, 100000, 5);
 		report(busca2.execute(bench), 1);
 		
-		BuscaTabu busca3 = new BuscaTabu(100, p, -5, 5, 10, 10000, 10);
+		BuscaTabu busca3 = new BuscaTabu(100, p, -5, 5, 30, 100000, 10);
 		report(busca3.execute(bench), 1);
 	}
 	
 	public static void hill(Benchmark bench, double p) {
-		HillClimbing hill = new HillClimbing(100, p, -100, 100, 100000, 1);
+		HillClimbing hill = new HillClimbing(100, p, -5, 5, 100000, 1);
 		report(hill.execute(bench), 1);
 		
-		HillClimbing hill2 = new HillClimbing(100, p, -100, 100, 100000, 5);
+		HillClimbing hill2 = new HillClimbing(100, p, -5, 5, 100000, 5);
 		report(hill2.execute(bench), 1);
 		
-		HillClimbing hill3 = new HillClimbing(100, p, -100, 100, 100000, 10);
+		HillClimbing hill3 = new HillClimbing(100, p, -5, 5, 100000, 10);
 		report(hill3.execute(bench), 1);
 	}
 	
 	public static void ils(Benchmark bench, double p) {
-		IteratedLocal ils = new IteratedLocal(100, p, -100, 100, 100000, 1);
+		ILS ils = new ILS(100, p, -5, 5, 100000, 1, 5);
 		report(ils.execute(bench), 1);
 		
-		IteratedLocal ils2 = new IteratedLocal(100, p, -100, 100, 100000, 5);
+		ILS ils2 = new ILS(100, p, -5, 5, 100000, 5, 10);
 		report(ils2.execute(bench), 1);
 		
-		IteratedLocal ils3 = new IteratedLocal(100, p, -100, 100, 100000, 10);
+		ILS ils3 = new ILS(100, p, -5, 5, 100000, 10, 15);
 		report(ils3.execute(bench), 1);
 	}
 	
