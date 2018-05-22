@@ -7,11 +7,13 @@ import br.ufs.benchmark.Benchmark;
 public class SimulatedAnnealing extends BaseAlgorithm {
 
 	//Temperatura
-	private int temperature;
+	private double temperature;
+	private int interaction;
 	
-	public SimulatedAnnealing(int lengthArray, double p, int min, int max, int temperature, int r) {
+	public SimulatedAnnealing(int lengthArray, double p, int min, int max, int temperature, int interaction ,int r) {
 		super(lengthArray, p, min, max, r);
 		this.temperature = temperature;
+		this.interaction = interaction;
 	}
 	
 	/**
@@ -23,16 +25,14 @@ public class SimulatedAnnealing extends BaseAlgorithm {
 		double[] s = initSolution(lengthArray);
 		double[] best = s;
 		ArrayList<Double> bests = new ArrayList<Double>();
-		double[] evolutionQuality = new double[temperature];
 		bests.add(function.quality(s));
 		int cont = 0;
 
-		while (temperature > 0 || function.quality(best) == 0) {
-			evolutionQuality[cont] = function.quality(s);
+		while (cont < interaction || function.quality(best) == 0) {
 			double[] r = tweak(copy(s));
-			if ((function.quality(r) < function.quality(s)) || (Math.random() < Math.pow(Math.E, ((function.quality(r) - function.quality(s)) / temperature))))
+			if ((function.quality(r) < function.quality(s)) || (Math.random() < Math.pow(Math.E, ((function.quality(s) - function.quality(r)) / temperature))))
 				s = r;
-			temperature--;
+			temperature = temperature > 0 ? temperature-0.01 : 0;
 			if (function.quality(s) < function.quality(best)) {
 				best = s;
 				bests.add(function.quality(s));

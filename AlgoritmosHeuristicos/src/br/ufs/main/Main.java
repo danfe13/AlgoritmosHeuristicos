@@ -18,32 +18,78 @@ import br.ufs.algorithm.BuscaTabu;
 import br.ufs.algorithm.HillClimbing;
 import br.ufs.algorithm.IteratedLocal;
 import br.ufs.algorithm.SimulatedAnnealing;
+import br.ufs.benchmark.Benchmark;
 import br.ufs.benchmark.Rastrigin;
 import br.ufs.benchmark.Rosenbrocks;
+import br.ufs.benchmark.Schwefels;
 import br.ufs.benchmark.Sphere;
 
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// TODO Auto-generated method stub
-		/*IteratedLocal ils = new IteratedLocal(5, 1, -100, 100, 10000);
-		plotarGrafico(ils.execute(new Sphere()), "ILS");*/
+		//simulated(new Rastrigin(), 0.5);
 		
-		//BuscaTabu tabu = new BuscaTabu(5, 1, -100, 100, 100, 100000);
-		//plotarGrafico(tabu.execute(new Sphere()), "Tabu");
+		//buscaTabu(new Rastrigin(), 0.001);
 		
-		HillClimbing hill = new HillClimbing(100, 0.01, -100, 100, 100000, 5);
-		plotarGrafico(hill.execute(new Sphere()), "HillClimbing");
+		//ils(new Sphere(), 0.01);
 		
-		/*SimulatedAnnealing simulated = new SimulatedAnnealing(5, 1, -100, 100, 10);
-		plotarGrafico(simulated.execute(new Sphere()), "Simulated");*/
+		//hill(new Rosenbrocks(), 0.01);
+		
 	}
+	
+	public static void simulated(Benchmark bench, double p) {
+		SimulatedAnnealing simulated = new SimulatedAnnealing(100, p, -5, 5, 100, 100000, 1);
+		report(simulated.execute(bench), 1);
+		
+		SimulatedAnnealing simulated2 = new SimulatedAnnealing(100, p, -5, 5, 100, 100000, 5);
+		report(simulated2.execute(bench), 1);
+		
+		SimulatedAnnealing simulated3 = new SimulatedAnnealing(100, p, -5, 5, 100, 100000, 10);
+		report(simulated3.execute(bench), 1);
+	}
+	
+	public static void buscaTabu(Benchmark bench, double p) {
+		BuscaTabu busca = new BuscaTabu(100, p, -5, 5, 10, 10000, 1);
+		report(busca.execute(bench), 1);
+		
+		BuscaTabu busca2 = new BuscaTabu(100, p, -5, 5, 10, 10000, 5);
+		report(busca2.execute(bench), 1);
+		
+		BuscaTabu busca3 = new BuscaTabu(100, p, -5, 5, 10, 10000, 10);
+		report(busca3.execute(bench), 1);
+	}
+	
+	public static void hill(Benchmark bench, double p) {
+		HillClimbing hill = new HillClimbing(100, p, -100, 100, 100000, 1);
+		report(hill.execute(bench), 1);
+		
+		HillClimbing hill2 = new HillClimbing(100, p, -100, 100, 100000, 5);
+		report(hill2.execute(bench), 1);
+		
+		HillClimbing hill3 = new HillClimbing(100, p, -100, 100, 100000, 10);
+		report(hill3.execute(bench), 1);
+	}
+	
+	public static void ils(Benchmark bench, double p) {
+		IteratedLocal ils = new IteratedLocal(100, p, -100, 100, 100000, 1);
+		report(ils.execute(bench), 1);
+		
+		IteratedLocal ils2 = new IteratedLocal(100, p, -100, 100, 100000, 5);
+		report(ils2.execute(bench), 1);
+		
+		IteratedLocal ils3 = new IteratedLocal(100, p, -100, 100, 100000, 10);
+		report(ils3.execute(bench), 1);
+	}
+	
 	
 	public static void plotarGrafico(ArrayList<Double> evolutionQuality, String algoritmo) throws FileNotFoundException, IOException {
 		DefaultCategoryDataset ds = new DefaultCategoryDataset();
 		for (int i = 0; i < evolutionQuality.size(); i++) {
 			ds.addValue(evolutionQuality.get(i), " ", i + "");
 			System.out.println(evolutionQuality.get(i));
+			if (i == evolutionQuality.size()-1)
+				System.out.println(" FINAL");
 		}					
 		
 		JFreeChart grafico = ChartFactory.createLineChart(algoritmo, "Iteração", "Valor", ds,
@@ -52,6 +98,13 @@ public class Main {
 
 		ImageIcon imagem = new ImageIcon("grafico.png");
 		JOptionPane.showMessageDialog(null, "", "", JOptionPane.INFORMATION_MESSAGE, imagem);	
+		
+	}
+	
+	public static void report(ArrayList<Double> evolutionQuality, int indice){
+		System.out.println("======================="+indice+"==========================");
+		System.out.println("Meta:"+evolutionQuality.get(evolutionQuality.size()-1));
+		System.out.println("Vizinhos:"+evolutionQuality.size());
 		
 	}
 

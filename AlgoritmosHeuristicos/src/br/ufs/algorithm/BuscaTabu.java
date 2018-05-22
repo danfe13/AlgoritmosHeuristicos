@@ -53,7 +53,6 @@ public class BuscaTabu extends BaseAlgorithm {
 			l.add(xr.intValue());
 			if(function.quality(s) < function.quality(best)) {
 				bests.add(function.quality(s));
-				System.out.println(function.quality(s));
 				best = s;
 			}
 			cont++;

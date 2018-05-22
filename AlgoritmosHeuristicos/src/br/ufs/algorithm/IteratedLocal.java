@@ -15,11 +15,12 @@ public class IteratedLocal extends BaseAlgorithm {
 	//Lista de rages
 	protected LinkedList<Integer> mins;
 	protected LinkedList<Integer> maxs;
-	
+	protected int r;
 	
 	public IteratedLocal(int lengthArray, double p, int min, int max, int iterations, int r) {
 		super(lengthArray, p, min, max, r);
 		this.iterations = iterations;
+		this.r = r;
 	}
 	
 	/**
@@ -67,7 +68,7 @@ public class IteratedLocal extends BaseAlgorithm {
 		for (int i = 0; i < s.length; i++) {
 			if (p >= Math.random()) {
 				do {
-					n = random(5);
+					n = s[i] + random(r);
 				} while ((n < min) || (n > max));
 				s[i] = n;
 			}
@@ -82,7 +83,7 @@ public class IteratedLocal extends BaseAlgorithm {
 			percorrido += maxs.get(i) - mins.get(i);
 		}
 		//verifica se foi percorrido 75% do rage;
-		double total = (getMax()-getMin())*0.75;
+		double total = (getMax()-getMin())*0.7;
 		return  total <= percorrido;
 		
 	}
@@ -113,7 +114,7 @@ public class IteratedLocal extends BaseAlgorithm {
 		int n;
 		boolean newlocal;
 		do {
-			n = (int)random(5);
+			n = (int)randomTotal();
 			newlocal = true;
 			for(int y = 0; y<mins.size(); y++) {
 				if(n>mins.get(y) && n<maxs.get(y)) {
