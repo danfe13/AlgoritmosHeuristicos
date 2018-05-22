@@ -27,17 +27,31 @@ public class ILS extends BaseAlgorithm {
 		while(count < iterations) {
 			int count2 = 0;
 			evolutionQuality[count] = quality(bestSolution, option);
+<<<<<<< HEAD
 			System.out.println(quality(bestSolution, option)+" "+count);
 			int time = (int) (Math.random()*10);
 			
 			while(count2 < time) {
 				double[] R = tweak(copy(S));
 				if (quality(R,option) < quality(S,option))
+=======
+			System.out.println(quality(bestSolution, option));
+			int time = (int) (Math.random()*100);
+			
+			while(count2 < time) {
+				System.out.println(count2+" "+time);
+				double[] R = tweak(copy(S),getMinValue(S),getMaxValue(S));
+				if (quality(R,option) > quality(S,option))
+>>>>>>> branch 'antonio' of https://github.com/danfe13/AlgoritmosHeuristicos.git
 					S = R;
 				count2++;
 			}
 			
+<<<<<<< HEAD
 			if (quality(S,option) < quality(bestSolution,option))
+=======
+			if (quality(S,option) > quality(bestSolution,option))
+>>>>>>> branch 'antonio' of https://github.com/danfe13/AlgoritmosHeuristicos.git
 				bestSolution = S;
 			H = newHomeBase(H, S, option);
 			S = perturb(H);
@@ -66,7 +80,11 @@ public class ILS extends BaseAlgorithm {
 	}
 	
 	public double[] perturb(double[] s) {
+<<<<<<< HEAD
 		return tweak(copy(s),0.1);
+=======
+		return super.tweak(copy(s));
+>>>>>>> branch 'antonio' of https://github.com/danfe13/AlgoritmosHeuristicos.git
 	}
 	
 	public double[] newHomeBase(double[] h, double[] s, int option) {
