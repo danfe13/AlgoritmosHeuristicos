@@ -47,7 +47,7 @@ public class Main {
 					double[] evolutionQuality = simulatedAnnealing.execute(new SphereFunction());
 					plotarGrafico(evolutionQuality, "Sphere Function witch Simulated Annealing");
 				}else if(algorithm == 3) {
-					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 1, 100, 100000, 30);
+					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 5, 10, 100000, 4);
 					double[] evolutionQuality = tabuSearch.execute(new SphereFunction());
 					plotarGrafico(evolutionQuality, "Sphere Function witch Tabu Search");
 				}else if(algorithm == 4) {
@@ -66,7 +66,7 @@ public class Main {
 					plotarGrafico(evolutionQuality, "SchwefelsProblem witch Simulated Annealing");
 				}
 				else if(algorithm == 3) {
-					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 1, 100, 100000, 30);
+					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 5, 10, 100000, 4);
 					double[] evolutionQuality = tabuSearch.execute(new SchwefelsProblem());
 					plotarGrafico(evolutionQuality, "SchwefelsProblem witch Tabu Search");
 				}else if(algorithm == 4) {
@@ -76,39 +76,39 @@ public class Main {
 				}
 			}else if(benchmark == 3) {
 				if(algorithm == 1) {
-					hillClimbing = new HillClimbing(100, 0.1, 100, -100, 100, 0.5, 100000);
+					hillClimbing = new HillClimbing(100, 0.01, 100, -100, 100, 1, 100000);
 					double[] evolutionQuality = hillClimbing.execute(new RosenbrockFunction());
 					plotarGrafico(evolutionQuality, "Shifted Rosenbrock’s Function witch Hill Climbing");
 				}else if(algorithm == 2) {
-					simulatedAnnealing = new SimulatedAnnealing(100, 0.01, 100, -100, 100, 0.5, 100000, 100);
+					simulatedAnnealing = new SimulatedAnnealing(100, 0.1, 100, -100, 100, 1, 100000, 1000);
 					double[] evolutionQuality = simulatedAnnealing.execute(new RosenbrockFunction());
 					plotarGrafico(evolutionQuality, "Shifted Rosenbrock’s Function witch Simulated Annealing");
 				}
 				else if(algorithm == 3) {
-					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 5, 10, 10000, 4);
+					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 5, 10, 100000, 4);
 					double[] evolutionQuality = tabuSearch.execute(new RosenbrockFunction());
 					plotarGrafico(evolutionQuality, "Shifted Rosenbrock’s Function witch Tabu Search");
 				}else if(algorithm == 4) {
-					ils = new ILS(100, 0.5, 100, -100, 100, 5, 10000, 0.1);	
+					ils = new ILS(100, 0.01, 100, -100, 100, 1, 100000, 0.03);	
 					double[] evolutionQuality = ils.execute(new RosenbrockFunction());
 					plotarGrafico(evolutionQuality, "Shifted Rosenbrock’s Function witch ILS");
 				}
 			}else if(benchmark == 4) {
 				if(algorithm == 1) {
-					hillClimbing = new HillClimbing(100, 0.1, 100, -100, 100, 5, 100000);
+					hillClimbing = new HillClimbing(100, 0.01, 100, -100, 100, 1, 100000);
 					double[] evolutionQuality = hillClimbing.execute(new RastriginFunction());
 					plotarGrafico(evolutionQuality, "Shifted Rastrigin’s Function witch Hill Climbing");
 				}else if(algorithm == 2) {
-					simulatedAnnealing = new SimulatedAnnealing(100, 0.9, 100, -100, 100, 5, 100000, 100);
+					simulatedAnnealing = new SimulatedAnnealing(100, 0.01, 100, -100, 100, 1, 100000, 100);
 					double[] evolutionQuality = simulatedAnnealing.execute(new RastriginFunction());
 					plotarGrafico(evolutionQuality, "Shifted Rastrigin’s Function witch Simulated Annealing");
 				}
 				else if(algorithm == 3) {
-					tabuSearch = new TabuSearch(100, 0.5, 100, -100, 100, 5, 10, 10000, 4);
+					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 5, 100, 100000, 30);
 					double[] evolutionQuality = tabuSearch.execute(new RastriginFunction());
 					plotarGrafico(evolutionQuality, "Shifted Rastrigin’s Function witch Tabu Search");
 				}else if(algorithm == 4) {
-					ils = new ILS(100, 0.5, 100, -100, 100, 5, 10000, 0.2);	
+					ils = new ILS(100, 0.01, 100, -100, 100, 1, 100000, 0.03);	
 					double[] evolutionQuality = ils.execute(new RastriginFunction());
 					plotarGrafico(evolutionQuality, "Shifted Rastrigin’s Function witch ILS");
 				}
