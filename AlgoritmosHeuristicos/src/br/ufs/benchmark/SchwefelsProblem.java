@@ -2,7 +2,7 @@ package br.ufs.benchmark;
 
 public class SchwefelsProblem implements IBenchmark {
 
-	public double quality(double[] s) {
+	public Double quality(double[] s) {
 		double F = Math.abs(s[0]);
 	    double z;
 	    for (int i = 1; i < s.length; i++) {

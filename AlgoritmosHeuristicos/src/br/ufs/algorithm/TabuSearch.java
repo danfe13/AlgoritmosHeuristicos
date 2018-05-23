@@ -26,7 +26,7 @@ public class TabuSearch extends BaseAlgorithm {
 		double[] s = initSolution(lengthArray);
 		double[] best = s;
 		Queue<Integer> tabu = new LinkedList<>(); 
-		tabu.add((int) b.quality(s));
+		tabu.add(b.quality(s).intValue());
 		double[] evolutionQuality = new double[iterations];
 		
 		int cont = 0;
@@ -44,14 +44,14 @@ public class TabuSearch extends BaseAlgorithm {
 
 				double[] w = tweak(copy(s));
 	
-				if((!tabu.contains((int) b.quality(w))) && (b.quality(w) < b.quality(r) || tabu.contains((int) b.quality(r))))
+				if((!tabu.contains(b.quality(w).intValue())) && (b.quality(w) < b.quality(r) || tabu.contains(b.quality(r).intValue())))
 					r = w;
 
 			}
 			
-			if(!tabu.contains((int) b.quality(r))) {
+			if(!tabu.contains(b.quality(r).intValue())) {
 				s = r;
-				tabu.add((int) b.quality(r));
+				tabu.add(b.quality(r).intValue());
 			}
 			
 			if(b.quality(s) < b.quality(best))

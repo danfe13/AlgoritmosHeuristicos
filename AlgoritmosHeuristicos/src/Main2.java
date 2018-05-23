@@ -13,7 +13,7 @@ public class Main2 {
 
 	public static void main(String[] args) {
 
-		int benchmark = 4;
+		int benchmark = 3;
 		int algorithm = 3;
 
 		for (int i = 0; i < 20; i++) {
@@ -35,7 +35,7 @@ public class Main2 {
 					evolutionQuality = simulatedAnnealing.execute(new SphereFunction());
 	
 				} else if (algorithm == 3) {
-					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 5, 10, 100000, 4);
+					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 1, 10, 10000, 10);
 					evolutionQuality = tabuSearch.execute(new SphereFunction());
 	
 				} else if (algorithm == 4) {
@@ -53,7 +53,7 @@ public class Main2 {
 					evolutionQuality = simulatedAnnealing.execute(new SchwefelsProblem());
 	
 				} else if (algorithm == 3) {
-					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 5, 10, 100000, 4);
+					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 1, 10, 10000, 10);
 					evolutionQuality = tabuSearch.execute(new SchwefelsProblem());
 	
 				} else if (algorithm == 4) {
@@ -67,11 +67,11 @@ public class Main2 {
 					evolutionQuality = hillClimbing.execute(new RosenbrockFunction());
 	
 				} else if (algorithm == 2) {
-					simulatedAnnealing = new SimulatedAnnealing(100, 0.1, 100, -100, 100, 1, 100000, 1000);
+					simulatedAnnealing = new SimulatedAnnealing(100, 0.01, 100, -100, 100, 1, 100000, 100);
 					evolutionQuality = simulatedAnnealing.execute(new RosenbrockFunction());
 	
 				} else if (algorithm == 3) {
-					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 5, 10, 100000, 4);
+					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 1, 10, 10000, 10);
 					evolutionQuality = tabuSearch.execute(new RosenbrockFunction());
 	
 				} else if (algorithm == 4) {
@@ -89,7 +89,7 @@ public class Main2 {
 					evolutionQuality = simulatedAnnealing.execute(new RastriginFunction());
 	
 				} else if (algorithm == 3) {
-					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 5, 100, 100000, 30);
+					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 1, 10, 10000, 10);
 					evolutionQuality = tabuSearch.execute(new RastriginFunction());
 	
 				} else if (algorithm == 4) {
