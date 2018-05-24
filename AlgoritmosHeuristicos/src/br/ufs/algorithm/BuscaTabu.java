@@ -3,7 +3,6 @@ package br.ufs.algorithm;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.stream.DoubleStream;
 
 import br.ufs.benchmark.Benchmark;
 
@@ -12,7 +11,7 @@ public class BuscaTabu extends BaseAlgorithm {
 	//Comprimento máximo da lista tabu
 	private int lengthTabu;
 	//Número de Iterações do Algoritmo
-	protected int iterations;
+	private int iterations;
 	
 	public BuscaTabu(int lengthArray, double p, int min, int max, int lengthTabu, int iterations, int r) {
 		super(lengthArray, p, min, max, r);

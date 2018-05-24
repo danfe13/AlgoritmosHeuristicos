@@ -35,6 +35,16 @@ public abstract class BaseAlgorithm {
 		
 	}
 	
+	public double[] worseSolution(int length) {
+		
+		double[] s = new double[length];
+		for (int i = 0; i < s.length; i++) {
+			s[i] = max;
+		}
+		return s;
+		
+	}
+	
 	public void print(double[] s) {
 		
 		String result = "[";
@@ -55,7 +65,6 @@ public abstract class BaseAlgorithm {
 			if (p >= Math.random()) {
 				do {
 					n = random(r);
-					
 				} while ((s[i] + n < min) || (s[i] + n > max));
 				s[i] = s[i] + n;
 			}
@@ -95,6 +104,7 @@ public abstract class BaseAlgorithm {
 			num = Math.random() * r * 1;
 		}
 		return num;
+		
 	}
 	
 	public int getMin() {

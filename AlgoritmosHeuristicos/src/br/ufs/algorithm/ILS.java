@@ -6,30 +6,32 @@ import br.ufs.benchmark.Benchmark;
 
 public class ILS extends BaseAlgorithm {
 
-	//Número de Iterações do Algoritmo
-	protected int iterations;
+	//Número de Iterações do Algoritmo Laço Externo
+	private int iExterno;
+	//Número de Iterações do Algoritmo Laço Interno
+	private int iInterno;
+	private double pPertub;
+	private int rPertub;
 	
-	private double distancePertub;
-	
-	public ILS(int lengthArray, double p, int min, int max, int r, int iterations, double distancePertub) {
+	public ILS(int lengthArray, double p, int min, int max, int r, int iExterno, int iInterno, double pPerturb, int rPerturb) {
 		super(lengthArray, p, min, max, r);
-		this.iterations = iterations;
-		this.distancePertub = distancePertub;
+		this.iExterno = iExterno;
+		this.iInterno = iInterno;
+		this.pPertub = pPerturb;
+		this.rPertub = rPerturb;
 	}
 
 	public ArrayList<Double> execute(Benchmark function) {
 		
 		double[] s = initSolution(lengthArray);
-		double[] h = s; //O "Home Base" corrente
 		double[] best = s;
 		
 		ArrayList<Double> bests = new ArrayList<Double>();
 		bests.add(function.quality(s));
 		
 		int cont = 0;
-		while(cont < iterations) {
-			int time  = (int) (Math.random() * lengthArray);
-			for (int i = 0; i < time; i++) {
+		while(cont < iExterno) {
+			for (int i = 0; i < iInterno; i++) {
 				double[] r = tweak(copy(s));
 				if(function.quality(r) < function.quality(s)){ 
 					s = r;
@@ -39,8 +41,7 @@ public class ILS extends BaseAlgorithm {
 			if(function.quality(s) < function.quality(best)){
 				best = s;
 			}
-			h = newHomeBase(h, s, function);
-			s = perturb(h);
+			s = perturb(s);
 			cont++;
 		}
 		
@@ -49,7 +50,7 @@ public class ILS extends BaseAlgorithm {
 	}
 	
 	public double[] perturb(double[] s) {
-		return tweak(copy(s), distancePertub);
+		return tweak(copy(s), pPertub, rPertub);
 	}
 	
 	public double[] newHomeBase(double[] h, double[] s, Benchmark function) {
@@ -60,10 +61,10 @@ public class ILS extends BaseAlgorithm {
 	}
 	
 	//Algorithm 8 Bounded Uniform Convolution
-	public double[] tweak(double[] s, double distance) {
+	public double[] tweak(double[] s, double p, int r) {
 		double n;
 		for (int i = 0; i < s.length; i++) {
-			if (distance >= Math.random()) {
+			if (p >= Math.random()) {
 				do {
 					n = random(r) + s[i];
 				} while ((n < min) || (n > max));
