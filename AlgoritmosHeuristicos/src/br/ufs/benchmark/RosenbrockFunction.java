@@ -1,7 +1,11 @@
 package br.ufs.benchmark;
 
+import br.ufs.algorithm.BaseAlgorithm;
+
 public class RosenbrockFunction implements IBenchmark{
 
+	private double qualityWorseSolution = 0;
+	
 	public Double quality(double[] s) {
 		double sum = 0.0;
 
@@ -11,6 +15,13 @@ public class RosenbrockFunction implements IBenchmark{
 	    }
 
 	    return (sum);
+	}
+	
+	public Double getQualityWorseSolution(BaseAlgorithm baseAlgorithm) {
+		if(qualityWorseSolution == 0) {
+			qualityWorseSolution = quality(baseAlgorithm.worseSolution());
+		}
+		return qualityWorseSolution;
 	}
 
 }

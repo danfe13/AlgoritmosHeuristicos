@@ -14,6 +14,7 @@ public abstract class BaseAlgorithm {
 	protected int min;
 	//Valor max do Array Solução
 	protected int max;
+	//Range do Tweak
 	protected double rangeTweak;
 	
 	public BaseAlgorithm(int lengthArray, double p, int rangeSolution, int min, int max, double rangeTweak) {
@@ -25,11 +26,21 @@ public abstract class BaseAlgorithm {
 		this.rangeTweak = rangeTweak;
 	}
 
-	public double[] initSolution(int length) {
+	public double[] initSolution() {
 		
-		double[] s = new double[length];
+		double[] s = new double[lengthArray];
 		for (int i = 0; i < s.length; i++) {
 			s[i] = random(this.rangeSolution);
+		}
+		return s;
+		
+	}
+	
+	public double[] worseSolution() {
+		
+		double[] s = new double[lengthArray];
+		for (int i = 0; i < s.length; i++) {
+			s[i] = max;
 		}
 		return s;
 		

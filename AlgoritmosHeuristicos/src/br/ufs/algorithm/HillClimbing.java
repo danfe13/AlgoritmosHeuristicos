@@ -19,7 +19,7 @@ public class HillClimbing extends BaseAlgorithm {
 	 */
 	public double[] execute(IBenchmark b) {
 
-		double[] s = initSolution(lengthArray);
+		double[] s = initSolution();
 		double[] evolutionQuality = new double[iterations];
 		
 		int cont = 0;

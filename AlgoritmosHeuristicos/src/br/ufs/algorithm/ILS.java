@@ -17,7 +17,7 @@ public class ILS extends BaseAlgorithm {
 
 	public double[] execute(IBenchmark b) {
 		
-		double[] s = initSolution(lengthArray);
+		double[] s = initSolution();
 		double[] h = s; //O "Home Base" corrente
 		double[] best = s;
 		

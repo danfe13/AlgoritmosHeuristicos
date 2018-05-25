@@ -1,5 +1,6 @@
 package br.ufs.algorithm;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -23,10 +24,10 @@ public class TabuSearch extends BaseAlgorithm {
 	
 	public double[] execute(IBenchmark b) {
 		
-		double[] s = initSolution(lengthArray);
+		double[] s = initSolution();
 		double[] best = s;
-		Queue<Integer> tabu = new LinkedList<>(); 
-		tabu.add(b.quality(s).intValue());
+		Queue<int[]> tabu = new LinkedList<>(); 
+		tabu.add(converter(s));
 		double[] evolutionQuality = new double[iterations];
 		
 		int cont = 0;
@@ -44,18 +45,23 @@ public class TabuSearch extends BaseAlgorithm {
 
 				double[] w = tweak(copy(s));
 	
-				if((!tabu.contains(b.quality(w).intValue())) && (b.quality(w) < b.quality(r) || tabu.contains(b.quality(r).intValue())))
+				if(
+					(!contains(w, tabu)) && 
+					(b.quality(w) < b.quality(r) || (contains(r, tabu)))
+				) {
 					r = w;
+				}
 
 			}
 			
-			if(!tabu.contains(b.quality(r).intValue())) {
+			if(!contains(r, tabu)) {
 				s = r;
-				tabu.add(b.quality(r).intValue());
+				tabu.add(converter(r));
 			}
 			
-			if(b.quality(s) < b.quality(best))
+			if(b.quality(s) < b.quality(best)) {
 				best = s;
+			}
 			
 			cont++;
 			
@@ -63,6 +69,31 @@ public class TabuSearch extends BaseAlgorithm {
 		
 		return evolutionQuality;
 		
+	}
+	
+	public int[] converter(double[] s) {
+		int[] sInt = new int[s.length];
+		for (int i = 0; i < s.length; i++) {
+			sInt[i] = (int) s[i];
+		}
+		return sInt;
+	}
+	
+	public boolean contains(double[] s, Queue<int[]> tabu) {
+		boolean contain = false;
+		int[] sInt = converter(s);
+		for (int[] elementTabu : tabu) {
+			Arrays.sort(sInt);
+	        Arrays.sort(elementTabu);
+	        int cont = 0;
+	        for(int i=0;i<sInt.length;i++){
+				if(elementTabu[i] == sInt[i]) {
+					cont++;
+				}
+	        }
+	        if (cont == s.length) return true;
+		}
+		return contain;
 	}
 
 }
