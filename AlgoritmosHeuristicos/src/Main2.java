@@ -14,7 +14,7 @@ public class Main2 {
 	public static void main(String[] args) {
 
 		int benchmark = 3;
-		int algorithm = 3;
+		int algorithm = 1;
 
 		for (int i = 0; i < 20; i++) {
 		
