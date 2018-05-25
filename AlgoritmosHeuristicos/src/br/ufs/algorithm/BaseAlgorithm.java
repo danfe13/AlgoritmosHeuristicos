@@ -29,7 +29,7 @@ public abstract class BaseAlgorithm {
 		
 		double[] s = new double[length];
 		for (int i = 0; i < s.length; i++) {
-			s[i] = randomTotal();
+			s[i] = random(max);
 		}
 		return s;
 		
@@ -84,15 +84,14 @@ public abstract class BaseAlgorithm {
 		
 	}
 	
-	public double randomTotal() {
-		double num;
-		double sinal = Math.random();
-		if (sinal < 0.5 && min < 0) {
-			num = Math.random() * -1;
-		} else {
-			num = Math.random() * 1;
+	public int[] copyToInt(double[] s) {
+		
+		int[] r = new int[s.length];
+		for (int i = 0; i < s.length; i++) {
+			r[i] = (int)s[i];
 		}
-		return num;
+		return r;
+		
 	}
 	
 	public double random(int r) {

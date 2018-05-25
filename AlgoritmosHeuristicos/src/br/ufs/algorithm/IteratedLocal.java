@@ -113,7 +113,7 @@ public class IteratedLocal extends BaseAlgorithm {
 		int n;
 		boolean newlocal;
 		do {
-			n = (int)randomTotal();
+			n = (int)random(max);
 			newlocal = true;
 			for(int y = 0; y<mins.size(); y++) {
 				if(n>mins.get(y) && n<maxs.get(y)) {

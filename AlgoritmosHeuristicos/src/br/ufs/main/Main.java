@@ -31,9 +31,9 @@ public class Main {
 		// TODO Auto-generated method stub
 		//simulated(new Rastrigin(), 0.1);
 		
-		//buscaTabu(new Rastrigin(), 0.1);
+		buscaTabu(new Sphere(), 0.2);
 		
-		ils(new Rastrigin(), 0.1);
+		//ils(new Rastrigin(), 0.1);
 		
 		//hill(new Rastrigin(), 0.1);
 		
@@ -51,14 +51,8 @@ public class Main {
 	}
 	
 	public static void buscaTabu(Benchmark bench, double p) {
-		BuscaTabu busca = new BuscaTabu(100, p, -5, 5, 30, 100000, 1);
+		BuscaTabu busca = new BuscaTabu(100, p, -100, 100, 100, 100, 100000, 1);
 		report(busca.execute(bench), 1);
-		
-		BuscaTabu busca2 = new BuscaTabu(100, p, -5, 5, 30, 100000, 5);
-		report(busca2.execute(bench), 1);
-		
-		BuscaTabu busca3 = new BuscaTabu(100, p, -5, 5, 30, 100000, 10);
-		report(busca3.execute(bench), 1);
 	}
 	
 	public static void hill(Benchmark bench, double p) {
@@ -73,14 +67,9 @@ public class Main {
 	}
 	
 	public static void ils(Benchmark bench, double p) {
-		ILS ils = new ILS(100, p, -5, 5, 100000, 1, 5);
+		ILS ils = new ILS(100, p, -5, 5, 5, 1000, 100, 0.1, 10);
 		report(ils.execute(bench), 1);
 		
-		ILS ils2 = new ILS(100, p, -5, 5, 100000, 5, 10);
-		report(ils2.execute(bench), 1);
-		
-		ILS ils3 = new ILS(100, p, -5, 5, 100000, 10, 15);
-		report(ils3.execute(bench), 1);
 	}
 	
 	
