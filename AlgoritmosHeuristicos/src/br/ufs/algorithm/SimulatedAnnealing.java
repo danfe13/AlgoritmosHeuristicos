@@ -6,6 +6,7 @@ public class SimulatedAnnealing extends BaseAlgorithm {
 	private double temperature;
 
 	private int iterations;
+	
 
 	public SimulatedAnnealing(int lengthArray, double p, int min, int max, int range, int temperature, int iterations) {
 		super(lengthArray, p, min, max, range);
@@ -19,22 +20,25 @@ public class SimulatedAnnealing extends BaseAlgorithm {
 	 * */
 	
 	public double[] execute(int option) {
-
+		
+		double worseSolution = this.quality(this.worseSolution(),option);
+		
 		double[] s = initSolution(lengthArray);
 		double[] best = s;
 		double[] evolutionQuality = new double[iterations];
 		int cont = 0;
-		while ((cont < iterations) || (quality(best,option) == 0)) {
-			System.out.println( quality(best,option)+" "+cont);
+		double decreaseT = temperature/iterations;
+
+		while ((cont < iterations) || (quality(best,option) == 0.000)) {
 			evolutionQuality[cont] = quality(best,option);
 
 
 			double[] r = tweak(copy(s));
 			if (quality(r,option) < quality(s,option) || 
-					Math.random() < Math.pow(Math.E, ((quality(s,option) - quality(r,option)) / temperature))) {
+					Math.random() < Math.pow(Math.E, ((normalize(quality(s,option),worseSolution) - normalize(quality(r,option),worseSolution)) / temperature))) {
 				s = r;
 			}
-			temperature = temperature > 0 ? temperature-0.01 : 0;
+			temperature = temperature > 0 ? temperature-decreaseT : 0;
 			
 			if (quality(s,option) < quality(best,option)) {
 				best = s;
@@ -43,6 +47,10 @@ public class SimulatedAnnealing extends BaseAlgorithm {
 		}
 		return evolutionQuality;
 
+	}
+	
+	public double normalize(double quality, double pior){
+		return quality/pior;
 	}
 
 

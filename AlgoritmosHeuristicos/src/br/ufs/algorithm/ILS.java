@@ -31,7 +31,7 @@ public class ILS extends BaseAlgorithm {
 			int time = (int) (Math.random()*10);			
 			while(count2 < time) {
 				double[] R = tweak(copy(S));
-				if (quality(R,option) > quality(S,option))
+				if (quality(R,option) < quality(S,option))
 					S = R;
 				count2++;
 			}

@@ -7,10 +7,7 @@ public class HillClimbing extends BaseAlgorithm {
 
 	public HillClimbing(int lengthArray, double p, int min, int max,  int range, int iterations) {
 		super(lengthArray, p, min, max, range);
-		this.iterations = iterations;
-		
-		
-		
+		this.iterations = iterations;		
 	}
 
 	/**
@@ -25,7 +22,6 @@ public class HillClimbing extends BaseAlgorithm {
 
 		int cont = 0;
 		while (cont < iterations) {
-			System.out.println(quality(s,option)+" "+cont);
 			evolutionQuality[cont] = quality(s,option);
 			double[] r = tweak(copy(s));
 			if (quality(r,option) < quality(s,option)) {

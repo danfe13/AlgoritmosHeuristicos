@@ -1,22 +1,22 @@
 package br.ufs.algorithm;
 
 public abstract class BaseAlgorithm {
-	
+
 	//Tamanho do Array Solução
 	protected int lengthArray;
-	
+
 	//Probabilidade de adicionar ruído a um elemento no Array
 	protected double p;
-	
+
 	//Valor min do Array Solução
 	protected int min;
-	
+
 	//Valor max do Array Solução
 	protected int max;
-	
+
 	//Range de cada elemento do Array Solução
 	protected int range;
-	
+
 	public BaseAlgorithm(int lengthArray, double p, int min, int max, int range) {
 		this.lengthArray = lengthArray;
 		this.p = p;
@@ -26,17 +26,27 @@ public abstract class BaseAlgorithm {
 	}
 
 	public double[] initSolution(int length) {
-		
+
 		double[] s = new double[length];
 		for (int i = 0; i < s.length; i++) {
 			s[i] = random(range);
 		}
 		return s;
-		
+
 	}
-	
+
+	public double[] worseSolution() {
+
+		double[] s = new double[lengthArray];
+		for (int i = 0; i < s.length; i++) {
+			s[i] = max;
+		}
+		return s;
+
+	}
+
 	public void print(double[] s, int option) {
-		
+
 		String result = "[";
 		for (int i = 0; i < s.length; i++) {
 			if(i == s.length - 1)
@@ -45,38 +55,38 @@ public abstract class BaseAlgorithm {
 				result = result + s[i] + ", ";
 		}
 		System.out.println(result + " - " + quality(s,option));
-		
+
 	}
-	
+
 	//Algorithm 8 Bounded Uniform Convolution
 	public double[] tweak(double[] s) {
-		
+
 		double n;
-		
+
 		for (int i = 0; i < s.length; i++) {
 			if (p >= Math.random()) {
 				do {
 					n = random(range);
-					
+
 				} while ((s[i] + n < min) || (s[i] + n > max));
 				s[i] = s[i] + n;
 			}
-				
+
 		}
 		return s;
-		
+
 	}
-	
+
 	public double[] copy(double[] s) {
-		
+
 		double[] r = new double[s.length];
 		for (int i = 0; i < s.length; i++) {
 			r[i] = s[i];
 		}
 		return r;
-		
+
 	}
-	
+
 	public double random(int range) {
 		double num;
 		double sinal = Math.random();
@@ -87,7 +97,7 @@ public abstract class BaseAlgorithm {
 		}
 		return num;
 	}
-	
+
 	public double quality(double[] s, int option) {
 		switch (option) {
 		case 1:
@@ -102,17 +112,17 @@ public abstract class BaseAlgorithm {
 	}
 
 	public double qualitySchwefels(double[] s) {
-		double prev_sum, curr_sum, outer_sum;
-
-		curr_sum = s[0];
-		outer_sum = (curr_sum * curr_sum);
-
+		double F = Math.abs(s[0]);
+		double z;
 		for (int i = 1; i < s.length; i++) {
-			prev_sum = curr_sum;
-			curr_sum = prev_sum + s[i];
-			outer_sum += (curr_sum * curr_sum);
+			z = Math.abs(s[i]);
+			F = max(F, z);            
 		}
-		return (outer_sum);
+		return F;
+	}
+
+	public double max(double x, double y){
+		return x>=y?x:y;
 	}
 
 	public double qualitySphere(double[] s) {
@@ -122,7 +132,7 @@ public abstract class BaseAlgorithm {
 		}
 		return (sum);
 	}
-	
+
 	public double qualityRosenbrock(double[] s) {
 		double sum = 0.0;
 
@@ -133,7 +143,7 @@ public abstract class BaseAlgorithm {
 		}
 		return sum;
 	}
-	
+
 	public double qualityRastrigin(double[] s) {
 		double sum = 0.0;
 
@@ -142,6 +152,6 @@ public abstract class BaseAlgorithm {
 		}
 		return sum;
 	}
-	
-	
+
+
 }
