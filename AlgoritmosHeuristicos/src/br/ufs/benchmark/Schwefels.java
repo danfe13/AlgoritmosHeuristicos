@@ -4,18 +4,17 @@ package br.ufs.benchmark;
 public class Schwefels implements Benchmark{
 
 	public double quality(double[] s) {
-		double prev_sum, curr_sum, outer_sum;
-
-	    curr_sum = s[0];
-	    outer_sum = (curr_sum * curr_sum);
-
+		double F = Math.abs(s[0]);
+	    double z;
 	    for (int i = 1; i < s.length; i++) {
-	      prev_sum = curr_sum;
-	      curr_sum = prev_sum + s[i];
-	      outer_sum += (curr_sum * curr_sum);
+	    	z = Math.abs(s[i]);
+	        F = max(F, z);            
 	    }
-
-	    return (outer_sum);
+	    return F;
+	}
+	
+	public double max(double x, double y){
+        return x>=y?x:y;
 	}
 
 }

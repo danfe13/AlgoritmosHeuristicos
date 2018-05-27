@@ -2,6 +2,7 @@ package br.ufs.algorithm;
 
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -26,7 +27,7 @@ public class BuscaTabu extends BaseAlgorithm {
 		
 		double[] s = initSolution(lengthArray);
 		double[] best = s;
-		Queue<double[]> l = new LinkedList<double[]>();
+		Queue<int[]> l = new LinkedList<int[]>();
 		ArrayList<Double> bests = new ArrayList<Double>();
 		bests.add(function.quality(s));
 		Double xw = 0.0, xr = 0.0;
@@ -45,9 +46,11 @@ public class BuscaTabu extends BaseAlgorithm {
 					r = w;
 				}
 			}
-			if(!contains(l, r))
+			if(!contains(l, r)) {
 				s = r;
-			l.add(r);
+				Arrays.sort(s);
+				l.add(copyToInt(s));
+			}
 			if(function.quality(s) < function.quality(best)) {
 				bests.add(function.quality(s));
 				best = s;
@@ -57,8 +60,8 @@ public class BuscaTabu extends BaseAlgorithm {
 		return bests;
 	}
 	
-	public boolean contains(Queue<double[]> l, double[] s) {
-		for(double [] tabu: l) {
+	public boolean contains(Queue<int[]> l, double[] s) {
+		for(int [] tabu: l) {
 			if(toCompare(s,tabu)) {
 				return true;
 			}
@@ -66,9 +69,10 @@ public class BuscaTabu extends BaseAlgorithm {
 		return false;
 	}
 	
-	public boolean toCompare(double[] s, double[] tabu) {
+	public boolean toCompare(double[] s, int[] tabu) {
+		Arrays.sort(s);
 		for(int i = 0; i<s.length; i++) {
-			if(s[i] < tabu[i]) {
+			if((int)s[i] <= tabu[i]) {
 				return false;
 			}
 		}

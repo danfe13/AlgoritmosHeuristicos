@@ -33,9 +33,6 @@ public class HillClimbing extends BaseAlgorithm {
 			if (function.quality(r) < function.quality(s)) {
 				s = r;
 				bests.add(function.quality(r));
-				if((int)function.quality(s) == 0){
-					System.out.println(cont+"-"+function.quality(s));
-				}
 			}
 			cont++;
 		}

@@ -29,46 +29,53 @@ public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// TODO Auto-generated method stub
-		//simulated(new Rastrigin(), 0.1);
+		//simulated(new Schwefels(), 0.1);
 		
-		buscaTabu(new Sphere(), 0.2);
+		//buscaTabu(new Rastrigin(), 0.01);
 		
-		//ils(new Rastrigin(), 0.1);
+		ils(new Rastrigin(), 0.01);
 		
+		//hill(new Rastrigin(), 0.01);
 		//hill(new Rastrigin(), 0.1);
+		//hill(new Rastrigin(), 0.7);
 		
 	}
 	
 	public static void simulated(Benchmark bench, double p) {
-		SimulatedAnnealing simulated = new SimulatedAnnealing(100, p, -5, 5, 100, 100000, 1);
+		SimulatedAnnealing simulated = new SimulatedAnnealing(100, p, -100, 100, 1, 100000, 1);
 		report(simulated.execute(bench), 1);
-		
-		SimulatedAnnealing simulated2 = new SimulatedAnnealing(100, p, -5, 5, 100, 100000, 5);
-		report(simulated2.execute(bench), 1);
-		
-		SimulatedAnnealing simulated3 = new SimulatedAnnealing(100, p, -5, 5, 100, 100000, 10);
-		report(simulated3.execute(bench), 1);
+		SimulatedAnnealing simulated2 = new SimulatedAnnealing(100, p, -100, 100, 5000, 100000, 1);
+		report(simulated2.execute(bench), 2);
+		SimulatedAnnealing simulated3 = new SimulatedAnnealing(100, p, -100, 100, 10000, 100000, 1);
+		report(simulated3.execute(bench), 3);
 	}
 	
 	public static void buscaTabu(Benchmark bench, double p) {
-		BuscaTabu busca = new BuscaTabu(100, p, -100, 100, 100, 100, 100000, 1);
+		BuscaTabu busca = new BuscaTabu(100, p, -5, 5, 50, 2000, 50, 1);
 		report(busca.execute(bench), 1);
+		BuscaTabu busca2 = new BuscaTabu(100, p, -5, 5, 50, 1000, 100, 1);
+		report(busca2.execute(bench), 2);
+		BuscaTabu busca3 = new BuscaTabu(100, p, -5, 5, 50, 500, 200, 1);
+		report(busca3.execute(bench), 3);
 	}
 	
 	public static void hill(Benchmark bench, double p) {
 		HillClimbing hill = new HillClimbing(100, p, -5, 5, 100000, 1);
 		report(hill.execute(bench), 1);
-		
 		HillClimbing hill2 = new HillClimbing(100, p, -5, 5, 100000, 5);
-		report(hill2.execute(bench), 1);
-		
+		report(hill2.execute(bench), 2);
 		HillClimbing hill3 = new HillClimbing(100, p, -5, 5, 100000, 10);
-		report(hill3.execute(bench), 1);
+		report(hill3.execute(bench), 3);
+		
 	}
 	
 	public static void ils(Benchmark bench, double p) {
-		ILS ils = new ILS(100, p, -5, 5, 5, 1000, 100, 0.1, 10);
+		ILS ils = new ILS(100, p, -5, 5, 1, 1000, 100, 0.1, 2);
 		report(ils.execute(bench), 1);
+		ILS ils2 = new ILS(100, p, -5, 5, 1, 1000, 100, 0.3, 4);
+		report(ils2.execute(bench), 1);
+		ILS ils3 = new ILS(100, p, -5, 5, 1, 1000, 100, 0.6, 8);
+		report(ils3.execute(bench), 1);
 		
 	}
 	
