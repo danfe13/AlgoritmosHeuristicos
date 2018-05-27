@@ -29,7 +29,7 @@ public class SimulatedAnnealing extends BaseAlgorithm {
 		int cont = 0;
 		double decreaseT = temperature/iterations;
 
-		while ((cont < iterations) || (quality(best,option) == 0.000)) {
+		while ((cont < iterations) || (quality(best,option) == 0)) {
 			evolutionQuality[cont] = quality(best,option);
 
 

@@ -33,7 +33,6 @@ public class BuscaTabu extends BaseAlgorithm {
 		while (count < iterations) {
 			evolution[count] = quality(bestSolution,option);
 			
-			System.out.println(quality(bestSolution, option)+" "+count);
 			if (tabu.size() > lengthTabu)
 				tabu.remove();
 			

@@ -5,11 +5,12 @@ public class ILS extends BaseAlgorithm {
 	private int iterations;
 	private int[] maxValues;
 	private int[] minValues;
-
-	public ILS(int lengthArray, double p, int min, int max, int range, int iterations) {
+	private int time;
+	public ILS(int lengthArray, double p, int min, int max, int range, int iteration, int time) {
 		super(lengthArray, p, min,max, range);
 		// TODO Auto-generated constructor stub
 		this.iterations = iterations;
+		this.time = time;
 
 
 	}
@@ -27,8 +28,7 @@ public class ILS extends BaseAlgorithm {
 		while(count < iterations) {
 			int count2 = 0;
 			evolutionQuality[count] = quality(bestSolution, option);
-			System.out.println(quality(bestSolution, option)+" "+count);
-			int time = (int) (Math.random()*10);			
+			
 			while(count2 < time) {
 				double[] R = tweak(copy(S));
 				if (quality(R,option) < quality(S,option))
@@ -46,14 +46,15 @@ public class ILS extends BaseAlgorithm {
 		return evolutionQuality;
 	}
 
-	public double[] tweak(double[] s, double d) {
+	public double[] tweak(double[] s) {
 
 		double n;
-
+		double Pd = Math.random() ;
+		double Prange = Math.random()*10;
 		for (int i = 0; i < s.length; i++) {
-			if (d >= Math.random()) {
+			if (Pd >= Math.random()) {
 				do {
-					n = random(range);
+					n = Prange+s[i];
 
 				} while ((s[i] + n < min) || (s[i] + n > max));
 				s[i] = s[i] + n;
@@ -65,7 +66,7 @@ public class ILS extends BaseAlgorithm {
 	}
 	
 	public double[] perturb(double[] s) {
-		return tweak(copy(s),0.1);
+		return tweak(copy(s));
 	}
 	
 	public double[] newHomeBase(double[] h, double[] s, int option) {
