@@ -29,7 +29,7 @@ public abstract class BaseAlgorithm {
 
 		double[] s = new double[length];
 		for (int i = 0; i < s.length; i++) {
-			s[i] = random(range);
+			s[i] = random(max);
 		}
 		return s;
 
