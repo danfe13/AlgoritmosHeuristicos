@@ -6,12 +6,13 @@ public class ILS extends BaseAlgorithm {
 	private int[] maxValues;
 	private int[] minValues;
 	private int time;
-	public ILS(int lengthArray, double p, int min, int max, int range, int iteration, int time) {
+	private double dPertub;
+	public ILS(int lengthArray, double p, int min, int max, int range, int iteration, int time, double dPertub) {
 		super(lengthArray, p, min,max, range);
 		// TODO Auto-generated constructor stub
-		this.iterations = iterations;
+		this.iterations = iteration;
 		this.time = time;
-
+		this.dPertub = dPertub;
 
 	}
 
@@ -39,22 +40,22 @@ public class ILS extends BaseAlgorithm {
 			if (quality(S,option) < quality(bestSolution,option))
 				bestSolution = S;
 			H = newHomeBase(H, S, option);
-			S = perturb(H);
+			S = perturb(H, dPertub);
 			count++;
 		}
 
 		return evolutionQuality;
 	}
 
-	public double[] tweak(double[] s) {
+	public double[] tweak(double[] s, double dPertube) {
 
 		double n;
-		double Pd = Math.random() ;
-		double Prange = Math.random()*10;
+		//double Pd = Math.random() ;
+		//double Prange = Math.random()*10;
 		for (int i = 0; i < s.length; i++) {
-			if (Pd >= Math.random()) {
+			if (dPertube >= Math.random()) {
 				do {
-					n = Prange+s[i];
+					n = random(range);
 
 				} while ((s[i] + n < min) || (s[i] + n > max));
 				s[i] = s[i] + n;
@@ -65,8 +66,8 @@ public class ILS extends BaseAlgorithm {
 
 	}
 	
-	public double[] perturb(double[] s) {
-		return tweak(copy(s));
+	public double[] perturb(double[] s, double dPertub) {
+		return tweak(copy(s),dPertub);
 	}
 	
 	public double[] newHomeBase(double[] h, double[] s, int option) {
