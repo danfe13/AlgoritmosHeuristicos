@@ -51,9 +51,9 @@ public class Main {
 					double[] evolutionQuality = tabuSearch.execute(new SphereFunction());
 					plotarGrafico(evolutionQuality, "Sphere Function witch Tabu Search");
 				}else if(algorithm == 4) {
-					ils = new ILS(100, 0.01, 100, -100, 100, 1, 100000, 0.1);	
-					double[] evolutionQuality = ils.execute(new SphereFunction());
-					plotarGrafico(evolutionQuality, "Sphere Function witch ILS");
+					//ils = new ILS(100, 0.01, 100, -100, 100, 1, 100000, 0.1);	
+					//double[] evolutionQuality = ils.execute(new SphereFunction());
+					//plotarGrafico(evolutionQuality, "Sphere Function witch ILS");
 				}
 			}else if(benchmark == 2) {
 				if(algorithm == 1) {
@@ -70,9 +70,9 @@ public class Main {
 					double[] evolutionQuality = tabuSearch.execute(new SchwefelsProblem());
 					plotarGrafico(evolutionQuality, "SchwefelsProblem witch Tabu Search");
 				}else if(algorithm == 4) {
-					ils = new ILS(100, 0.01, 100, -100, 100, 1, 100000, 0.1);	
-					double[] evolutionQuality = ils.execute(new SchwefelsProblem());
-					plotarGrafico(evolutionQuality, "SchwefelsProblem witch ILS");
+					//ils = new ILS(100, 0.01, 100, -100, 100, 1, 100000, 0.1);	
+					//double[] evolutionQuality = ils.execute(new SchwefelsProblem());
+					//plotarGrafico(evolutionQuality, "SchwefelsProblem witch ILS");
 				}
 			}else if(benchmark == 3) {
 				if(algorithm == 1) {
@@ -89,9 +89,9 @@ public class Main {
 					double[] evolutionQuality = tabuSearch.execute(new RosenbrockFunction());
 					plotarGrafico(evolutionQuality, "Shifted Rosenbrock’s Function witch Tabu Search");
 				}else if(algorithm == 4) {
-					ils = new ILS(100, 0.01, 100, -100, 100, 1, 100000, 0.03);	
-					double[] evolutionQuality = ils.execute(new RosenbrockFunction());
-					plotarGrafico(evolutionQuality, "Shifted Rosenbrock’s Function witch ILS");
+					//ils = new ILS(100, 0.01, 100, -100, 100, 1, 100000, 0.03);	
+					//double[] evolutionQuality = ils.execute(new RosenbrockFunction());
+					//plotarGrafico(evolutionQuality, "Shifted Rosenbrock’s Function witch ILS");
 				}
 			}else if(benchmark == 4) {
 				if(algorithm == 1) {
@@ -108,9 +108,9 @@ public class Main {
 					double[] evolutionQuality = tabuSearch.execute(new RastriginFunction());
 					plotarGrafico(evolutionQuality, "Shifted Rastrigin’s Function witch Tabu Search");
 				}else if(algorithm == 4) {
-					ils = new ILS(100, 0.01, 100, -100, 100, 1, 100000, 0.03);	
-					double[] evolutionQuality = ils.execute(new RastriginFunction());
-					plotarGrafico(evolutionQuality, "Shifted Rastrigin’s Function witch ILS");
+					//ils = new ILS(100, 0.01, 100, -100, 100, 1, 100000, 0.03);	
+					//double[] evolutionQuality = ils.execute(new RastriginFunction());
+					//plotarGrafico(evolutionQuality, "Shifted Rastrigin’s Function witch ILS");
 				}
 			}
 			

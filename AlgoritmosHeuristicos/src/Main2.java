@@ -13,8 +13,8 @@ public class Main2 {
 
 	public static void main(String[] args) {
 
-		int benchmark = 1;
-		int algorithm = 2;
+		int benchmark = 3;
+		int algorithm = 4;
 
 		for (int i = 0; i < 20; i++) {
 		
@@ -36,12 +36,12 @@ public class Main2 {
 	
 				} else if (algorithm == 3) {
 					//tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 1, 10, 10000, 10);
-					//tabuSearch = new TabuSearch(100, 0.2, 100, -100, 100, 1, 10, 1000, 100);
-					tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 1, 1, 100000, 1);
+					tabuSearch = new TabuSearch(100, 0.2, 100, -100, 100, 1, 10, 1000, 100);
+					//tabuSearch = new TabuSearch(100, 0.01, 100, -100, 100, 1, 1, 100000, 1);
 					evolutionQuality = tabuSearch.execute(new SphereFunction());
 	
 				} else if (algorithm == 4) {
-					ils = new ILS(100, 0.01, 100, -100, 100, 1, 100000, 0.01);
+					ils = new ILS(100, 0.01, 100, -100, 100, 1, 1000, 100, 0.3);
 					evolutionQuality = ils.execute(new SphereFunction());
 	
 				}
@@ -59,7 +59,7 @@ public class Main2 {
 					evolutionQuality = tabuSearch.execute(new SchwefelsProblem());
 	
 				} else if (algorithm == 4) {
-					ils = new ILS(100, 0.01, 100, -100, 100, 1, 100000, 0.1);
+					ils = new ILS(100, 0.01, 100, -100, 100, 1, 1000, 100, 0.3);
 					evolutionQuality = ils.execute(new SchwefelsProblem());
 	
 				}
@@ -77,7 +77,7 @@ public class Main2 {
 					evolutionQuality = tabuSearch.execute(new RosenbrockFunction());
 	
 				} else if (algorithm == 4) {
-					ils = new ILS(100, 0.01, 100, -100, 100, 1, 100000, 0.03);
+					ils = new ILS(100, 0.01, 100, -100, 100, 1, 10000, 100, 0.3);
 					evolutionQuality = ils.execute(new RosenbrockFunction());
 	
 				}
@@ -95,7 +95,7 @@ public class Main2 {
 					evolutionQuality = tabuSearch.execute(new RastriginFunction());
 	
 				} else if (algorithm == 4) {
-					ils = new ILS(100, 0.01, 100, -100, 100, 1, 100000, 0.03);
+					ils = new ILS(100, 0.01, 100, -100, 100, 1, 1000, 100, 0.03);
 					evolutionQuality = ils.execute(new RastriginFunction());
 	
 				}

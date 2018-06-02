@@ -9,10 +9,13 @@ public class ILS extends BaseAlgorithm {
 	
 	private double distancePertub;
 	
-	public ILS(int lengthArray, double p, int rangeSolution, int min, int max, double rangeTweak, int iterations, double distancePertub) {
+	private int TIME;
+	
+	public ILS(int lengthArray, double p, int rangeSolution, int min, int max, double rangeTweak, int iterations, int TIME, double distancePertub) {
 		super(lengthArray, p, rangeSolution, min, max, rangeTweak);
 		this.iterations = iterations;
 		this.distancePertub = distancePertub;
+		this.TIME = TIME;
 	}
 
 	public double[] execute(IBenchmark b) {
@@ -26,8 +29,8 @@ public class ILS extends BaseAlgorithm {
 		int cont = 0;
 		while(cont < iterations) {
 			evolutionQuality[cont] = b.quality(best);
-			int time  = (int) (Math.random() * lengthArray);
-			for (int i = 0; i < time; i++) {
+			//int time  = (int) (Math.random() * lengthArray);
+			for (int i = 0; i < TIME; i++) {
 				double[] r = tweak(copy(s));
 				if(b.quality(r) < b.quality(s)) 
 					s = r;
